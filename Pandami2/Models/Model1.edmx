@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pandamidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="id_categorie" />
+          </Key>
+          <Property Name="id_categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_categorie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="demande_service">
+          <Key>
+            <PropertyRef Name="id_demande" />
+          </Key>
+          <Property Name="id_demande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_emetteur" Type="int" Nullable="false" />
+          <Property Name="date_enregistrement" Type="date" Nullable="false" />
+          <Property Name="date_realisation" Type="date" Nullable="false" />
+          <Property Name="adresse_realisation" Type="nvarchar" MaxLength="70" />
+          <Property Name="id_ville" Type="int" />
+          <Property Name="heure_realisation" Type="time" Precision="7" Nullable="false" />
+          <Property Name="id_type_service" Type="int" Nullable="false" />
+          <Property Name="date_annulation" Type="date" />
+          <Property Name="date_cloture" Type="date" />
+          <Property Name="date_non_finalisation" Type="date" />
+          <Property Name="id_motif_annulation" Type="int" />
+        </EntityType>
+        <EntityType Name="equipement">
+          <Key>
+            <PropertyRef Name="id_equipement" />
+          </Key>
+          <Property Name="id_equipement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_equipement" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipement_demande">
+          <Key>
+            <PropertyRef Name="id_equipement" />
+            <PropertyRef Name="id_demande" />
+          </Key>
+          <Property Name="id_equipement" Type="int" Nullable="false" />
+          <Property Name="id_demande" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipement_type_service">
+          <Key>
+            <PropertyRef Name="id_equipement" />
+            <PropertyRef Name="id_type_service" />
+          </Key>
+          <Property Name="id_equipement" Type="int" Nullable="false" />
+          <Property Name="id_type_service" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="id_genre" />
+          </Key>
+          <Property Name="id_genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_genre" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="motif_desinscription">
+          <Key>
+            <PropertyRef Name="id_motif" />
+          </Key>
+          <Property Name="id_motif" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_motif" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="type_service">
+          <Key>
+            <PropertyRef Name="id_type_service" />
+          </Key>
+          <Property Name="id_type_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_type_service" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_categorie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="utilisateur">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="prenom" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_genre" Type="int" Nullable="false" />
+          <Property Name="date_naissance" Type="date" Nullable="false" />
+          <Property Name="adresse" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="id_ville" Type="int" Nullable="false" />
+          <Property Name="num_telephone" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="date_inscription" Type="date" Nullable="false" />
+          <Property Name="date_desinscription" Type="date" />
+          <Property Name="id_motif_desinscription" Type="int" />
+        </EntityType>
+        <EntityType Name="ville">
+          <Key>
+            <PropertyRef Name="id_ville" />
+          </Key>
+          <Property Name="id_ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle_ville" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="code_postal" Type="nchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_demande_service_type_service">
+          <End Role="type_service" Type="Self.type_service" Multiplicity="1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_service">
+              <PropertyRef Name="id_type_service" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_type_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_demande_service_utilisateur">
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_emetteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_demande_service_ville">
+          <End Role="ville" Type="Self.ville" Multiplicity="0..1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="id_ville" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipement_demande_demande_service">
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="1" />
+          <End Role="equipement_demande" Type="Self.equipement_demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="demande_service">
+              <PropertyRef Name="id_demande" />
+            </Principal>
+            <Dependent Role="equipement_demande">
+              <PropertyRef Name="id_demande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipement_demande_equipement">
+          <End Role="equipement" Type="Self.equipement" Multiplicity="1" />
+          <End Role="equipement_demande" Type="Self.equipement_demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipement">
+              <PropertyRef Name="id_equipement" />
+            </Principal>
+            <Dependent Role="equipement_demande">
+              <PropertyRef Name="id_equipement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipement_type_service_equipement">
+          <End Role="equipement" Type="Self.equipement" Multiplicity="1" />
+          <End Role="equipement_type_service" Type="Self.equipement_type_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipement">
+              <PropertyRef Name="id_equipement" />
+            </Principal>
+            <Dependent Role="equipement_type_service">
+              <PropertyRef Name="id_equipement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipement_type_service_type_service">
+          <End Role="type_service" Type="Self.type_service" Multiplicity="1" />
+          <End Role="equipement_type_service" Type="Self.equipement_type_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_service">
+              <PropertyRef Name="id_type_service" />
+            </Principal>
+            <Dependent Role="equipement_type_service">
+              <PropertyRef Name="id_type_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_type_service_categorie">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="1" />
+          <End Role="type_service" Type="Self.type_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="id_categorie" />
+            </Principal>
+            <Dependent Role="type_service">
+              <PropertyRef Name="id_categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_genre">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="id_genre" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_motif_desinscription">
+          <End Role="motif_desinscription" Type="Self.motif_desinscription" Multiplicity="0..1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motif_desinscription">
+              <PropertyRef Name="id_motif" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_motif_desinscription" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_ville">
+          <End Role="ville" Type="Self.ville" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="id_ville" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pandamidbModelStoreContainer">
+          <EntitySet Name="categorie" EntityType="Self.categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="demande_service" EntityType="Self.demande_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipement" EntityType="Self.equipement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipement_demande" EntityType="Self.equipement_demande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipement_type_service" EntityType="Self.equipement_type_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="motif_desinscription" EntityType="Self.motif_desinscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_service" EntityType="Self.type_service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="utilisateur" EntityType="Self.utilisateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ville" EntityType="Self.ville" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_demande_service_type_service" Association="Self.FK_demande_service_type_service">
+            <End Role="type_service" EntitySet="type_service" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_demande_service_utilisateur" Association="Self.FK_demande_service_utilisateur">
+            <End Role="utilisateur" EntitySet="utilisateur" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_demande_service_ville" Association="Self.FK_demande_service_ville">
+            <End Role="ville" EntitySet="ville" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipement_demande_demande_service" Association="Self.FK_equipement_demande_demande_service">
+            <End Role="demande_service" EntitySet="demande_service" />
+            <End Role="equipement_demande" EntitySet="equipement_demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipement_demande_equipement" Association="Self.FK_equipement_demande_equipement">
+            <End Role="equipement" EntitySet="equipement" />
+            <End Role="equipement_demande" EntitySet="equipement_demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipement_type_service_equipement" Association="Self.FK_equipement_type_service_equipement">
+            <End Role="equipement" EntitySet="equipement" />
+            <End Role="equipement_type_service" EntitySet="equipement_type_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipement_type_service_type_service" Association="Self.FK_equipement_type_service_type_service">
+            <End Role="type_service" EntitySet="type_service" />
+            <End Role="equipement_type_service" EntitySet="equipement_type_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_type_service_categorie" Association="Self.FK_type_service_categorie">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="type_service" EntitySet="type_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_genre" Association="Self.FK_utilisateur_genre">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_motif_desinscription" Association="Self.FK_utilisateur_motif_desinscription">
+            <End Role="motif_desinscription" EntitySet="motif_desinscription" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_ville" Association="Self.FK_utilisateur_ville">
+            <End Role="ville" EntitySet="ville" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pandamidbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="id_categorie" />
+          </Key>
+          <Property Name="id_categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="type_service" Relationship="Self.FK_type_service_categorie" FromRole="categorie" ToRole="type_service" />
+        </EntityType>
+        <EntityType Name="demande_service">
+          <Key>
+            <PropertyRef Name="id_demande" />
+          </Key>
+          <Property Name="id_demande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_emetteur" Type="Int32" Nullable="false" />
+          <Property Name="date_enregistrement" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_realisation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="adresse_realisation" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="id_ville" Type="Int32" />
+          <Property Name="heure_realisation" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="id_type_service" Type="Int32" Nullable="false" />
+          <Property Name="date_annulation" Type="DateTime" Precision="0" />
+          <Property Name="date_cloture" Type="DateTime" Precision="0" />
+          <Property Name="date_non_finalisation" Type="DateTime" Precision="0" />
+          <Property Name="id_motif_annulation" Type="Int32" />
+          <NavigationProperty Name="type_service" Relationship="Self.FK_demande_service_type_service" FromRole="demande_service" ToRole="type_service" />
+          <NavigationProperty Name="utilisateur" Relationship="Self.FK_demande_service_utilisateur" FromRole="demande_service" ToRole="utilisateur" />
+          <NavigationProperty Name="ville" Relationship="Self.FK_demande_service_ville" FromRole="demande_service" ToRole="ville" />
+          <NavigationProperty Name="equipement" Relationship="Self.equipement_demande" FromRole="demande_service" ToRole="equipement" />
+        </EntityType>
+        <EntityType Name="equipement">
+          <Key>
+            <PropertyRef Name="id_equipement" />
+          </Key>
+          <Property Name="id_equipement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_equipement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="demande_service" Relationship="Self.equipement_demande" FromRole="equipement" ToRole="demande_service" />
+          <NavigationProperty Name="type_service" Relationship="Self.equipement_type_service" FromRole="equipement" ToRole="type_service" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="id_genre" />
+          </Key>
+          <Property Name="id_genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_genre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="utilisateur" Relationship="Self.FK_utilisateur_genre" FromRole="genre" ToRole="utilisateur" />
+        </EntityType>
+        <EntityType Name="motif_desinscription">
+          <Key>
+            <PropertyRef Name="id_motif" />
+          </Key>
+          <Property Name="id_motif" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_motif" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="utilisateur" Relationship="Self.FK_utilisateur_motif_desinscription" FromRole="motif_desinscription" ToRole="utilisateur" />
+        </EntityType>
+        <EntityType Name="type_service">
+          <Key>
+            <PropertyRef Name="id_type_service" />
+          </Key>
+          <Property Name="id_type_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_type_service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_categorie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="categorie" Relationship="Self.FK_type_service_categorie" FromRole="type_service" ToRole="categorie" />
+          <NavigationProperty Name="demande_service" Relationship="Self.FK_demande_service_type_service" FromRole="type_service" ToRole="demande_service" />
+          <NavigationProperty Name="equipement" Relationship="Self.equipement_type_service" FromRole="type_service" ToRole="equipement" />
+        </EntityType>
+        <EntityType Name="utilisateur">
+          <Key>
+            <PropertyRef Name="id_utilisateur" />
+          </Key>
+          <Property Name="id_utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_genre" Type="Int32" Nullable="false" />
+          <Property Name="date_naissance" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="adresse" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_ville" Type="Int32" Nullable="false" />
+          <Property Name="num_telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_inscription" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_desinscription" Type="DateTime" Precision="0" />
+          <Property Name="id_motif_desinscription" Type="Int32" />
+          <NavigationProperty Name="demande_service" Relationship="Self.FK_demande_service_utilisateur" FromRole="utilisateur" ToRole="demande_service" />
+          <NavigationProperty Name="genre" Relationship="Self.FK_utilisateur_genre" FromRole="utilisateur" ToRole="genre" />
+          <NavigationProperty Name="motif_desinscription" Relationship="Self.FK_utilisateur_motif_desinscription" FromRole="utilisateur" ToRole="motif_desinscription" />
+          <NavigationProperty Name="ville" Relationship="Self.FK_utilisateur_ville" FromRole="utilisateur" ToRole="ville" />
+        </EntityType>
+        <EntityType Name="ville">
+          <Key>
+            <PropertyRef Name="id_ville" />
+          </Key>
+          <Property Name="id_ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle_ville" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code_postal" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="demande_service" Relationship="Self.FK_demande_service_ville" FromRole="ville" ToRole="demande_service" />
+          <NavigationProperty Name="utilisateur" Relationship="Self.FK_utilisateur_ville" FromRole="ville" ToRole="utilisateur" />
+        </EntityType>
+        <Association Name="FK_type_service_categorie">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="1" />
+          <End Role="type_service" Type="Self.type_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="id_categorie" />
+            </Principal>
+            <Dependent Role="type_service">
+              <PropertyRef Name="id_categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_demande_service_type_service">
+          <End Role="type_service" Type="Self.type_service" Multiplicity="1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_service">
+              <PropertyRef Name="id_type_service" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_type_service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_demande_service_utilisateur">
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="utilisateur">
+              <PropertyRef Name="id_utilisateur" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_emetteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_demande_service_ville">
+          <End Role="ville" Type="Self.ville" Multiplicity="0..1" />
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="id_ville" />
+            </Principal>
+            <Dependent Role="demande_service">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_genre">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="id_genre" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_motif_desinscription">
+          <End Role="motif_desinscription" Type="Self.motif_desinscription" Multiplicity="0..1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motif_desinscription">
+              <PropertyRef Name="id_motif" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_motif_desinscription" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_utilisateur_ville">
+          <End Role="ville" Type="Self.ville" Multiplicity="1" />
+          <End Role="utilisateur" Type="Self.utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="id_ville" />
+            </Principal>
+            <Dependent Role="utilisateur">
+              <PropertyRef Name="id_ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="equipement_demande">
+          <End Role="demande_service" Type="Self.demande_service" Multiplicity="*" />
+          <End Role="equipement" Type="Self.equipement" Multiplicity="*" />
+        </Association>
+        <Association Name="equipement_type_service">
+          <End Role="equipement" Type="Self.equipement" Multiplicity="*" />
+          <End Role="type_service" Type="Self.type_service" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="pandamidbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorie" EntityType="Self.categorie" />
+          <EntitySet Name="demande_service" EntityType="Self.demande_service" />
+          <EntitySet Name="equipement" EntityType="Self.equipement" />
+          <EntitySet Name="genre" EntityType="Self.genre" />
+          <EntitySet Name="motif_desinscription" EntityType="Self.motif_desinscription" />
+          <EntitySet Name="type_service" EntityType="Self.type_service" />
+          <EntitySet Name="utilisateur" EntityType="Self.utilisateur" />
+          <EntitySet Name="ville" EntityType="Self.ville" />
+          <AssociationSet Name="FK_type_service_categorie" Association="Self.FK_type_service_categorie">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="type_service" EntitySet="type_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_demande_service_type_service" Association="Self.FK_demande_service_type_service">
+            <End Role="type_service" EntitySet="type_service" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_demande_service_utilisateur" Association="Self.FK_demande_service_utilisateur">
+            <End Role="utilisateur" EntitySet="utilisateur" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_demande_service_ville" Association="Self.FK_demande_service_ville">
+            <End Role="ville" EntitySet="ville" />
+            <End Role="demande_service" EntitySet="demande_service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_genre" Association="Self.FK_utilisateur_genre">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_motif_desinscription" Association="Self.FK_utilisateur_motif_desinscription">
+            <End Role="motif_desinscription" EntitySet="motif_desinscription" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_utilisateur_ville" Association="Self.FK_utilisateur_ville">
+            <End Role="ville" EntitySet="ville" />
+            <End Role="utilisateur" EntitySet="utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="equipement_demande" Association="Self.equipement_demande">
+            <End Role="demande_service" EntitySet="demande_service" />
+            <End Role="equipement" EntitySet="equipement" />
+          </AssociationSet>
+          <AssociationSet Name="equipement_type_service" Association="Self.equipement_type_service">
+            <End Role="equipement" EntitySet="equipement" />
+            <End Role="type_service" EntitySet="type_service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pandamidbModelStoreContainer" CdmEntityContainer="pandamidbEntities">
+          <EntitySetMapping Name="categorie">
+            <EntityTypeMapping TypeName="pandamidbModel.categorie">
+              <MappingFragment StoreEntitySet="categorie">
+                <ScalarProperty Name="id_categorie" ColumnName="id_categorie" />
+                <ScalarProperty Name="libelle_categorie" ColumnName="libelle_categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="demande_service">
+            <EntityTypeMapping TypeName="pandamidbModel.demande_service">
+              <MappingFragment StoreEntitySet="demande_service">
+                <ScalarProperty Name="id_demande" ColumnName="id_demande" />
+                <ScalarProperty Name="id_emetteur" ColumnName="id_emetteur" />
+                <ScalarProperty Name="date_enregistrement" ColumnName="date_enregistrement" />
+                <ScalarProperty Name="date_realisation" ColumnName="date_realisation" />
+                <ScalarProperty Name="adresse_realisation" ColumnName="adresse_realisation" />
+                <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+                <ScalarProperty Name="heure_realisation" ColumnName="heure_realisation" />
+                <ScalarProperty Name="id_type_service" ColumnName="id_type_service" />
+                <ScalarProperty Name="date_annulation" ColumnName="date_annulation" />
+                <ScalarProperty Name="date_cloture" ColumnName="date_cloture" />
+                <ScalarProperty Name="date_non_finalisation" ColumnName="date_non_finalisation" />
+                <ScalarProperty Name="id_motif_annulation" ColumnName="id_motif_annulation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipement">
+            <EntityTypeMapping TypeName="pandamidbModel.equipement">
+              <MappingFragment StoreEntitySet="equipement">
+                <ScalarProperty Name="id_equipement" ColumnName="id_equipement" />
+                <ScalarProperty Name="libelle_equipement" ColumnName="libelle_equipement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genre">
+            <EntityTypeMapping TypeName="pandamidbModel.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+                <ScalarProperty Name="libelle_genre" ColumnName="libelle_genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="motif_desinscription">
+            <EntityTypeMapping TypeName="pandamidbModel.motif_desinscription">
+              <MappingFragment StoreEntitySet="motif_desinscription">
+                <ScalarProperty Name="id_motif" ColumnName="id_motif" />
+                <ScalarProperty Name="libelle_motif" ColumnName="libelle_motif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_service">
+            <EntityTypeMapping TypeName="pandamidbModel.type_service">
+              <MappingFragment StoreEntitySet="type_service">
+                <ScalarProperty Name="id_type_service" ColumnName="id_type_service" />
+                <ScalarProperty Name="libelle_type_service" ColumnName="libelle_type_service" />
+                <ScalarProperty Name="id_categorie" ColumnName="id_categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="utilisateur">
+            <EntityTypeMapping TypeName="pandamidbModel.utilisateur">
+              <MappingFragment StoreEntitySet="utilisateur">
+                <ScalarProperty Name="id_utilisateur" ColumnName="id_utilisateur" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+                <ScalarProperty Name="num_telephone" ColumnName="num_telephone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="date_inscription" ColumnName="date_inscription" />
+                <ScalarProperty Name="date_desinscription" ColumnName="date_desinscription" />
+                <ScalarProperty Name="id_motif_desinscription" ColumnName="id_motif_desinscription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ville">
+            <EntityTypeMapping TypeName="pandamidbModel.ville">
+              <MappingFragment StoreEntitySet="ville">
+                <ScalarProperty Name="id_ville" ColumnName="id_ville" />
+                <ScalarProperty Name="libelle_ville" ColumnName="libelle_ville" />
+                <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="equipement_demande" TypeName="pandamidbModel.equipement_demande" StoreEntitySet="equipement_demande">
+            <EndProperty Name="demande_service">
+              <ScalarProperty Name="id_demande" ColumnName="id_demande" />
+            </EndProperty>
+            <EndProperty Name="equipement">
+              <ScalarProperty Name="id_equipement" ColumnName="id_equipement" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="equipement_type_service" TypeName="pandamidbModel.equipement_type_service" StoreEntitySet="equipement_type_service">
+            <EndProperty Name="equipement">
+              <ScalarProperty Name="id_equipement" ColumnName="id_equipement" />
+            </EndProperty>
+            <EndProperty Name="type_service">
+              <ScalarProperty Name="id_type_service" ColumnName="id_type_service" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
