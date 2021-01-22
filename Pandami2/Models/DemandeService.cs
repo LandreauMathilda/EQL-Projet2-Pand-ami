@@ -20,7 +20,6 @@ namespace Pandami2.Models
         private DateTime dateCloture;
         private DateTime dateNonFinalisation;
         private int idMotifAnnulation;
-        private List<string> listeCategoriesService;
 
         public int IdDemande { get => idDemande ; }
         public int IdEmetteur { get => idEmetteur; set => idEmetteur = value; }
@@ -38,10 +37,11 @@ namespace Pandami2.Models
         public DemandeService(int idEmetteur)
         {
             this.idEmetteur = idEmetteur;
-            ChargerListeCategorieService();
         }
 
-        private void ChargerListeCategorieService()
+        // Méthode qui permet d'obtenir la liste des catégories de service. 
+        // @return : un objet List<string> qui comporte l'ensemble des catégories de service.
+        public List<string> ChargerListeCategorieService()
         {
             SqlConnection cnx = new SqlConnection();
             cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
@@ -51,12 +51,58 @@ namespace Pandami2.Models
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "SELECT libelle_categorie from categorie";
             SqlDataReader dr = cmd.ExecuteReader();
+            List<string> listeCategorieService = new List<string>();
             while (dr.Read())
             {
-                listeCategoriesService.Add((string) dr["libelle_categorie"]);
+                listeCategorieService.Add((string) dr["libelle_categorie"]);
             }
             dr.Close();
             cnx.Close();
+            return listeCategorieService;
+        }
+
+        // Méthode qui permet d'obtenir la liste des types de service. 
+        // @return : un objet List<string> qui comporte l'ensemble des types de service.
+        public List<string> ChargerListeTypeService()
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "SELECT libelle_type_service from type_service";
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<string> listeTypeService = new List<string>();
+            while (dr.Read())
+            {
+                listeTypeService.Add((string)dr["libelle_categorie"]);
+            }
+            dr.Close();
+            cnx.Close();
+            return listeTypeService;
+        }
+
+        // Méthode qui permet d'obtenir la liste des types de service. 
+        // @return : un objet List<string> qui comporte l'ensemble des types de service.
+        public List<string> ChargerListeTypeService()
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "SELECT libelle_type_service from type_service";
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<string> listeTypeService = new List<string>();
+            while (dr.Read())
+            {
+                listeTypeService.Add((string)dr["libelle_categorie"]);
+            }
+            dr.Close();
+            cnx.Close();
+            return listeTypeService;
         }
 
     }
