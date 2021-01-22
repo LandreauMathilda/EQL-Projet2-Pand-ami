@@ -4,4 +4,60 @@
 }
 
 <h2>Deposer une demande de service</h2>
+<form method="post" action="">
+    <p>
+        <table>
+            <tr>
+                <td>
+                    <label for="typeservice">Type de service : </label>
+                    <select name="typeservice" id="typeservice">
+                        <option value="courses">Courses</option>
+                        <option value="sortirchien">Sortir le chien</option>
+                    </select>
+                </td>
 
+            <tr>
+                <td>
+                    <label for="catservice">Catégorie de service : </label>
+                    <select name="catservice" id="catservice">
+                        <option value="exterieur">Extérieur</option>
+                        <option value="interieur">Intérieur</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="besoineqm">Besoin en équipement : </label>
+                    <select name="besoineqm" id="besoineqm">
+                        <option value="voiture">Voiture</option>
+                        <option value="laisse">Laisse pour chien</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="datereal">Date de réalisation</label>
+                    <input type="date" id="datereal" name="trip-start" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="heurereal">Heure de réalisation : </label>
+                    <input type="time" name="heurereal" id="heurereal" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="lieureal">Lieu de réalisation (si différent du lieu de résidence) : </label>
+
+                    <label name="numrue">N° et rue : </label>
+                    <input type="text" name="numrue" id="numrue" />
+                    <label name="cp">Code Postal : </label>
+                    <input type="text" name="cp" id="cp" />
+                    <label name="ville">Ville :</label>
+                    <input type="text" name="ville" id="ville" />
+                </td>
+            </tr>
+        </table>
+    </p>
+</form>
