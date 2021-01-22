@@ -83,9 +83,9 @@ namespace Pandami2.Models
             return listeTypeService;
         }
 
-        // Méthode qui permet d'obtenir la liste des types de service. 
-        // @return : un objet List<string> qui comporte l'ensemble des types de service.
-        public List<string> ChargerListeTypeService()
+        // Méthode qui permet d'obtenir la liste des villes. 
+        // @return : un objet List<string> qui comporte l'ensemble des villes.
+        public List<string> ChargerListeVille()
         {
             SqlConnection cnx = new SqlConnection();
             cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
@@ -93,16 +93,16 @@ namespace Pandami2.Models
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT libelle_type_service from type_service";
+            cmd.CommandText = "SELECT libelle_ville || code_postal FROM ville";
             SqlDataReader dr = cmd.ExecuteReader();
-            List<string> listeTypeService = new List<string>();
+            List<string> listeVille = new List<string>();
             while (dr.Read())
             {
-                listeTypeService.Add((string)dr["libelle_categorie"]);
+                listeVille.Add((string)dr["libelle_categorie"]);
             }
             dr.Close();
             cnx.Close();
-            return listeTypeService;
+            return listeVille;
         }
 
     }
