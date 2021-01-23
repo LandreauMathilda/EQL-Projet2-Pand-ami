@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Pandami2.Models
 {
@@ -39,24 +40,29 @@ namespace Pandami2.Models
             this.idEmetteur = idEmetteur;
         }
 
+
+       string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
         // Méthode qui permet d'obtenir la liste des catégories de service. 
         // @return : un objet List<string> qui comporte l'ensemble des catégories de service.
         public List<string> ChargerListeCategorieService()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = connStr;
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT libelle_categorie from categorie";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "SELECT libelle_categorie from categorie"; // nom de la procédure stockée 
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeCategorieService = new List<string>();
-            while (dr.Read())
+            if (dr.HasRows)
             {
-                listeCategorieService.Add((string) dr["libelle_categorie"]);
+                while (dr.Read())
+                {
+                    listeCategorieService.Add((string)dr["libelle_categorie"]);
+                }
+                dr.Close();
             }
-            dr.Close();
             cnx.Close();
             return listeCategorieService;
         }
@@ -66,7 +72,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeTypeService()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = connStr;
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -74,11 +80,15 @@ namespace Pandami2.Models
             cmd.CommandText = "SELECT libelle_type_service from type_service";
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeTypeService = new List<string>();
+            if (dr.HasRows) 
+            { 
             while (dr.Read())
             {
-                listeTypeService.Add((string)dr["libelle_categorie"]);
+                listeTypeService.Add((string)dr["libelle_type_service"]);
             }
-            dr.Close();
+                dr.Close();
+            }
+            
             cnx.Close();
             return listeTypeService;
         }
@@ -88,7 +98,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeVille()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = connStr;
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -96,11 +106,14 @@ namespace Pandami2.Models
             cmd.CommandText = "SELECT libelle_ville || code_postal FROM ville";
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeVille = new List<string>();
-            while (dr.Read())
+            if (dr.HasRows) 
+            { 
+                while (dr.Read())
             {
-                listeVille.Add((string)dr["libelle_categorie"]);
+                listeVille.Add((string)dr["libelle_ville"]);
             }
             dr.Close();
+            }
             cnx.Close();
             return listeVille;
         }

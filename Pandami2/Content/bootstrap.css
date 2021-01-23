@@ -1583,8 +1583,8 @@ pre code {
 .container {
   padding-right: 15px;
   padding-left: 15px;
-  margin-right: 15vw;
-  margin-left: 15vw;
+  margin-right: auto;
+  margin-left: auto;
 }
 @media (min-width: 768px) {
   .container {
@@ -6852,12 +6852,12 @@ button.close {
  align-items : center;
 }
 #blocpresentation, #blocaccueil{
-    width : 70vw;
+    width : 78vw;
 }
 
 #blocgauche, #blocdroit {
     margin: auto;
-     width: 34vw;
+     width: 36.5vw;
     text-align: center;
     
 }
