@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Pandami2.Models
 {
@@ -20,6 +21,9 @@ namespace Pandami2.Models
         private DateTime dateCloture;
         private DateTime dateNonFinalisation;
         private int idMotifAnnulation;
+
+        
+            
 
         public int IdDemande { get => idDemande ; }
         public int IdEmetteur { get => idEmetteur; set => idEmetteur = value; }
@@ -39,12 +43,29 @@ namespace Pandami2.Models
             this.idEmetteur = idEmetteur;
         }
 
+        // constructeur chargé demande de service :
+        public DemandeService(DateTime dateEnregistrement, DateTime dateRealisation, string adresseRealisation, int villeRealisation, DateTime heureRealisation, int idEmetteur = default, int idTypeService = default)
+        {
+            this.dateEnregistrement = dateEnregistrement;
+            this.dateRealisation = dateRealisation;
+            this.adresseRealisation = adresseRealisation;
+            this.villeRealisation = villeRealisation;
+            this.heureRealisation = heureRealisation;
+            this.idTypeService = idTypeService;// remplacer par type de service 
+            this.idEmetteur = idEmetteur;// remplacer par utilisateur qui a créé la demande
+
+        }
+
+
+
+
+
         // Méthode qui permet d'obtenir la liste des catégories de service. 
         // @return : un objet List<string> qui comporte l'ensemble des catégories de service.
         public List<string> ChargerListeCategorieService()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -66,7 +87,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeTypeService()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -88,7 +109,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeVille()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = "Data Source=FORM224\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
@@ -104,6 +125,40 @@ namespace Pandami2.Models
             cnx.Close();
             return listeVille;
         }
+
+
+        
+        public List<DemandeService>AfficherDemandes()
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["pandamidb"].ConnectionString;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "SELECT * FORM demande_service";
+            cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            while(dr.Read())
+            {
+              DemandeService demandeService = new DemandeService((DateTime)dr["date_enregistrement"], 
+                                                                 (DateTime)dr["date_realisation"], 
+                                                                 (string)dr["adresse_realisation"], 
+                                                                 (int)dr["id_ville"], 
+                                                                 (DateTime)dr["heure_realisation"]);
+
+                listeDemandes.Add(demandeService);
+
+             }
+            dr.Close();
+            cnx.Close();
+            return listeDemandes;
+
+
+        }
+        
+       
+
 
     }
 }

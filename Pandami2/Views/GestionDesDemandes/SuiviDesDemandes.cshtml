@@ -1,15 +1,29 @@
 ﻿
+@Model.Pandami2.Models.DemandeService
+
 @{
     ViewBag.Title = "SuiviDesDemandes";
 }
 
-<h2>Suivi des demandes en cours</h2>
-<div>
-    <div>
-        <h3></h3>
-    </div>
-    <div>
+<h2>Liste des demandes en cours </h2>
 
-    </div>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>Date Enregistrement</th>
+            <th>Date Realisation</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Heure de réalisation</th>
+            <th>Type de service</th>
+        </tr>
+        @foreach (var data in Model.listeDemande)
+        {
+            <tr>
+                <td>@data.date_enregistrement</td>
+                
+            </tr>
+        }
+    </table>
 </div>
 
