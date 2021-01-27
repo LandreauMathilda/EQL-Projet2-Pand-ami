@@ -1,4 +1,4 @@
-﻿@model Pandami2.Models.DemandeService
+﻿@model Pandami2.Models.ViewModelDemandeService
 
 @{
     ViewBag.Title = "RechercherUneDemande";
@@ -6,97 +6,64 @@
 }
 
 <div class="jumbotron text-center">
-
     <h2>Rechercher Une demande de service </h2>
 </div>
-
 
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <br />
             <br />
-            
-            <form class=" form-inline" action="rechercher" method="get">
+            <form class="form-inline" action="" method="post">
                 <div class="input-group">
                     <select class="form-control">
                         <option selected>Recherche par type de service</option>
-                        @foreach (var data in Model.ChargerListeTypeService())
+                        @foreach (var data in Model.TypeServDao.ChargerListeTypeService())
                         {
                             <option value="1">@data</option>
                         }
-
                     </select>
                     <button class="form-control mr-sm h2 btn btn-default" type="submit">Rechercher</button>
-
                 </div>
-     
             </form>
         </div>
 
         <div class="col-sm-9">
             <h3>Liste des demandes de service en cours</h3>
-
-            @foreach (var item in Model.AfficherDemandes())
+            @foreach (var item in Model.DemServiceDao.AfficherDemandes())
             {
                 <form methode="post">
+                    <input type="text" name="idUtilisateur" value="@Model.IdEmetteur">
+                    <input type="text" name="idDemande" value="@item.IdDemande">
                     <div class="panel panel-default">
-
                         <div class="panel-heading">
-
-                            @Html.DisplayNameFor(model => model.DateEnregistrement)
-                            @Html.DisplayFor(modelItem => item.DateEnregistrement)
-                            @Html.DisplayNameFor(model => model.IdEmetteur)
-                            @Html.DisplayFor(modelItem => item.IdEmetteur)
-
+                            <label for="dateEnregistrement"> Date enregistrement </label>
+                            <input type="text" id="dateEnregistrement" value="@item.DateEnregistrement" />
+                            <label> Emetteur </label>
+                            <label id="idEmetteur" name="idEmetteur"> @item.IdEmetteur </label>
                         </div>
                         <div class="panel-body">
                             <table>
                                 <tr>
-                                    @Html.DisplayNameFor(model => model.IdTypeService)
-                                    @Html.DisplayFor(modelItem => item.IdTypeService)
+                                    <td> Type de service </td>
+                                    <td> @item.IdTypeService </td>
+                                <tr>
+                                    <td> Date de réalisation </td>
+                                    <td> @item.DateRealisation </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.DateRealisation)
-                                        @Html.DisplayFor(modelItem => item.DateRealisation)
-
-                                    </td>
-
-                                </tr>
+                                    <td> Adresse de réalisation </td>
+                                    <td> @item.AdresseRealisation </td>
                                 <tr>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.AdresseRealisation)
-                                        @Html.DisplayFor(modelItem => item.AdresseRealisation)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayNameFor(model => model.VilleRealisation)
-                                        @Html.DisplayFor(modelItem => item.VilleRealisation)
-                                    </td>
-
+                                    <td> Ville de réalisation </td>
+                                    <td> @item.VilleRealisation </td>
                                 </tr>
-
                             </table>
-
-
-
-                            <input type="submit" value="Repondre" class="btn btn-default pull-right" />
-                            
-
+                        </div>
+                        <input type="submit" value="Repondre" class="btn btn-default pull-right" />
+                    </div>
                 </form>
-
-
-             }
-
-
+            }
         </div>
-
-
-            
-                </div>
-           
-       
-      </div>
- </div>
-    
+    </div>
 </div>

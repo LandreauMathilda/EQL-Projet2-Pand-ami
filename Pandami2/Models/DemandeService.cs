@@ -23,10 +23,16 @@ namespace Pandami2.Models
         private DateTime dateNonFinalisation;
         private int idMotifAnnulation;
 
+<<<<<<< HEAD
         
             
 
         public int IdDemande { get => idDemande ; }
+=======
+        string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
+
+        public int IdDemande { get => idDemande; set => idDemande = value; }
+>>>>>>> 3fe10349b9afb27f82cfaaa1123d141b58e64967
         public int IdEmetteur { get => idEmetteur; set => idEmetteur = value; }
         public DateTime DateEnregistrement { get => dateEnregistrement; set => dateEnregistrement = value; }
         public DateTime DateRealisation { get => dateRealisation; set => dateRealisation = value; }
@@ -39,11 +45,12 @@ namespace Pandami2.Models
         public DateTime DateNonFinalisation { get => dateNonFinalisation; set => dateNonFinalisation = value; }
         public int IdMotifAnnulation { get => idMotifAnnulation; set => idMotifAnnulation = value; }
 
-        public DemandeService(int idEmetteur)
+        public DemandeService(int idUtilisateur)
         {
-            this.idEmetteur = idEmetteur;
+            this.idEmetteur = idUtilisateur;
         }
 
+<<<<<<< HEAD
 
        //string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
        
@@ -91,6 +98,9 @@ namespace Pandami2.Models
         // Méthode qui permet d'obtenir la liste des catégories de service. 
         // @return : un objet List<string> qui comporte l'ensemble des catégories de service.
         public List<string> ChargerListeCategorieService()
+=======
+        public String ChargerDateService(int idDemande)
+>>>>>>> 3fe10349b9afb27f82cfaaa1123d141b58e64967
         {
             SqlConnection cnx = new SqlConnection();
            
@@ -99,24 +109,26 @@ namespace Pandami2.Models
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "SELECT libelle_categorie from categorie"; // nom de la procédure stockée 
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
             SqlDataReader dr = cmd.ExecuteReader();
-            List<string> listeCategorieService = new List<string>();
+            //DateTime dateService = new DateTime();
+            String dateServiceString = "";
             if (dr.HasRows)
             {
                 while (dr.Read())
                 {
-                    listeCategorieService.Add((string)dr["libelle_categorie"]);
+                    dateServiceString = string.Format("{0:d}", dr["date_realisation"]);
                 }
                 dr.Close();
             }
             cnx.Close();
-            return listeCategorieService;
+
+            return dateServiceString;
         }
 
-        // Méthode qui permet d'obtenir la liste des types de service. 
-        // @return : un objet List<string> qui comporte l'ensemble des types de service.
-        public List<string> ChargerListeTypeService()
+        public String ChargerHeureService(int idDemande)
         {
             SqlConnection cnx = new SqlConnection();
             
@@ -124,26 +136,54 @@ namespace Pandami2.Models
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT libelle_type_service from type_service";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
             SqlDataReader dr = cmd.ExecuteReader();
-            List<string> listeTypeService = new List<string>();
-            if (dr.HasRows) 
-            { 
-            while (dr.Read())
+
+            String heureServiceString = "";
+            if (dr.HasRows)
             {
-                listeTypeService.Add((string)dr["libelle_type_service"]);
-            }
+                while (dr.Read())
+                {
+                    heureServiceString = string.Format("{0: HH:mm}", dr["date_realisation"]);
+                }
                 dr.Close();
             }
-            
+
             cnx.Close();
-            return listeTypeService;
+
+            return heureServiceString;
         }
 
-        // Méthode qui permet d'obtenir la liste des villes. 
-        // @return : un objet List<string> qui comporte l'ensemble des villes.
-        public List<string> ChargerListeVille()
+        public String ChargerAdresseRealisation(int idDemande)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            String adresseRealisation = "";
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    adresseRealisation = dr["adresse_realisation"].ToString();
+                }
+                dr.Close();
+            }
+
+            cnx.Close();
+            return adresseRealisation;
+        }
+
+        public int GetIdVille(int idDemande)
         {
             SqlConnection cnx = new SqlConnection();
           
@@ -151,23 +191,101 @@ namespace Pandami2.Models
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT libelle_ville || code_postal FROM ville";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
             SqlDataReader dr = cmd.ExecuteReader();
-            List<string> listeVille = new List<string>();
-            if (dr.HasRows) 
-            { 
-                while (dr.Read())
+            int idVille = 0;
+            String idVilleString = "";
+
+            if (dr.HasRows)
             {
-                listeVille.Add((string)dr["libelle_ville"]);
-            }
-            dr.Close();
+                while (dr.Read())
+                {
+                    idVilleString = (dr["id_ville"]).ToString();
+                }
+                dr.Close();
             }
             cnx.Close();
-            return listeVille;
+
+            idVille = int.Parse(idVilleString);
+            return idVille;
+        }
+
+        public int GetIdDemandeEnCours(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetIdDemandeEnCours";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            SqlParameter dateDuJourPara = new SqlParameter("@DateNow", DateTime.Now);
+            cmd.Parameters.Add(idUtilisateurPara);
+            cmd.Parameters.Add(dateDuJourPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            int idDemandeEnCours = 0;
+            String idDemandeEnCoursString = "";
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    idDemandeEnCoursString = (dr["id_demande"]).ToString();
+                }
+                dr.Close();
+            }
+            cnx.Close();
+
+            idDemandeEnCours = int.Parse(idDemandeEnCoursString);
+            return idDemandeEnCours;
+        }
+
+        public String BenevoleOuBeneficiaire(int idDemande, int idUtilisateur)
+        {
+
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            String statutBouB = "";
+            String idEmetteurString = "";
+            int idEmetteur = 0;
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    idEmetteurString = (dr["id_emetteur"]).ToString();
+                }
+                dr.Close();
+            }
+            cnx.Close();
+            idEmetteur = int.Parse(idEmetteurString);
+
+            if (idEmetteur == idUtilisateur)
+            {
+                statutBouB = "Bénéficiaire";
+            }
+            else if (idEmetteur != idUtilisateur)
+            {
+                statutBouB = "Bénévole";
+            }
+
+
+            return statutBouB;
         }
 
 
+<<<<<<< HEAD
         
         public List<DemandeService>AfficherDemandes()
         {
@@ -249,6 +367,36 @@ namespace Pandami2.Models
            
 
 
+=======
+        public int GetIdService(int idDemande)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.LireDonneesDemandeService";
+            SqlParameter idDemandePara = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(idDemandePara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            int idTypeService = 0;
+            String idTypeServiceString = "";
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    idTypeServiceString = (dr["id_type_service"]).ToString();
+                }
+                dr.Close();
+            }
+            cnx.Close();
+
+            idTypeService = int.Parse(idTypeServiceString);
+            return idTypeService;
+        }
+>>>>>>> 3fe10349b9afb27f82cfaaa1123d141b58e64967
     }
       
 

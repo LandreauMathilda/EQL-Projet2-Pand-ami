@@ -1,0 +1,48 @@
+﻿.demandes {
+    border: 0.3vh solid black;
+    margin-right: 3vw;
+    margin-bottom: 1vw;
+    margin-left: 3vw;
+    padding: 0.5vh;
+    border-radius: 5px;
+    width: 50vw;
+    display: grid;
+}
+
+#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours {
+    margin: 1vh;
+    padding: 1vh;
+    flex-basis: 7vw;
+    background-color: #fbf9ec;
+    align-content: center;
+}
+
+.bodydem {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.titredem {
+    text-align: center;
+    font-size: 3vh;
+}
+
+.btnsuividem {
+    padding: 0.5vh;
+    margin: 0.5vh;
+    font-size: 1.75vh;
+    float: right;
+}
+
+.lbl1 {
+    font-size: 1.75vh;
+}
+
+.lbl2 {
+    font-size: 1.5vh;
+    float: right;
+}
