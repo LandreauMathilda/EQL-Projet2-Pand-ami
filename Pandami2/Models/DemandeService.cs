@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace Pandami2.Models
 {
@@ -43,6 +44,9 @@ namespace Pandami2.Models
             this.idEmetteur = idEmetteur;
         }
 
+
+       //string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
+       
         // constructeur chargé demande de service :
         public DemandeService(DateTime dateEnregistrement, DateTime dateRealisation, string adresseRealisation, int villeRealisation, DateTime heureRealisation, int idEmetteur = default, int idTypeService = default)
         {
@@ -51,9 +55,33 @@ namespace Pandami2.Models
             this.adresseRealisation = adresseRealisation;
             this.villeRealisation = villeRealisation;
             this.heureRealisation = heureRealisation;
-            this.idTypeService = idTypeService;// remplacer par type de service 
-            this.idEmetteur = idEmetteur;// remplacer par utilisateur qui a créé la demande
+            this.idTypeService = idTypeService;// == type de service 
+            this.idEmetteur = idEmetteur;//  ==utilisateur qui a créé la demande
 
+        }
+
+        //Constructeur vide
+        public DemandeService()
+        {
+        }
+
+        public DemandeService(int idDemande, int idEmetteur, DateTime dateEnregistrement, DateTime dateRealisation, string adresseRealisation, int villeRealisation,
+            DateTime heureRealisation, int idTypeService, DateTime dateAnnulation, DateTime dateCloture, DateTime dateNonFinalisation, int idMotifAnnulation         
+            )
+        {
+            this.idDemande = idDemande;
+            this.idEmetteur = idEmetteur;
+            this.dateEnregistrement = dateEnregistrement;
+            this.dateRealisation = dateRealisation;
+            this.adresseRealisation = adresseRealisation;
+            this.villeRealisation = villeRealisation;
+            this.heureRealisation = heureRealisation;
+            this.idTypeService = idTypeService;
+            this.dateAnnulation = dateAnnulation;
+            this.dateCloture = dateCloture;
+            this.dateNonFinalisation = dateNonFinalisation;
+            this.idMotifAnnulation = idMotifAnnulation;
+            
         }
 
 
@@ -65,19 +93,23 @@ namespace Pandami2.Models
         public List<string> ChargerListeCategorieService()
         {
             SqlConnection cnx = new SqlConnection();
+           
             cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT libelle_categorie from categorie";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "SELECT libelle_categorie from categorie"; // nom de la procédure stockée 
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeCategorieService = new List<string>();
-            while (dr.Read())
+            if (dr.HasRows)
             {
-                listeCategorieService.Add((string) dr["libelle_categorie"]);
+                while (dr.Read())
+                {
+                    listeCategorieService.Add((string)dr["libelle_categorie"]);
+                }
+                dr.Close();
             }
-            dr.Close();
             cnx.Close();
             return listeCategorieService;
         }
@@ -87,6 +119,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeTypeService()
         {
             SqlConnection cnx = new SqlConnection();
+            
             cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
@@ -95,11 +128,15 @@ namespace Pandami2.Models
             cmd.CommandText = "SELECT libelle_type_service from type_service";
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeTypeService = new List<string>();
+            if (dr.HasRows) 
+            { 
             while (dr.Read())
             {
-                listeTypeService.Add((string)dr["libelle_categorie"]);
+                listeTypeService.Add((string)dr["libelle_type_service"]);
             }
-            dr.Close();
+                dr.Close();
+            }
+            
             cnx.Close();
             return listeTypeService;
         }
@@ -109,6 +146,7 @@ namespace Pandami2.Models
         public List<string> ChargerListeVille()
         {
             SqlConnection cnx = new SqlConnection();
+          
             cnx.ConnectionString = "Data Source=FORM229\\SQLEXPRESS;Initial Catalog=pandamidb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
@@ -117,11 +155,14 @@ namespace Pandami2.Models
             cmd.CommandText = "SELECT libelle_ville || code_postal FROM ville";
             SqlDataReader dr = cmd.ExecuteReader();
             List<string> listeVille = new List<string>();
-            while (dr.Read())
+            if (dr.HasRows) 
+            { 
+                while (dr.Read())
             {
-                listeVille.Add((string)dr["libelle_categorie"]);
+                listeVille.Add((string)dr["libelle_ville"]);
             }
             dr.Close();
+            }
             cnx.Close();
             return listeVille;
         }
@@ -131,34 +172,88 @@ namespace Pandami2.Models
         public List<DemandeService>AfficherDemandes()
         {
             SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["pandamidb"].ConnectionString;
+            cnx.ConnectionString= System.Configuration.ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "SELECT * FORM demande_service";
+            cmd.CommandText = "Select * From demande_service";
             cmd.CommandType = System.Data.CommandType.Text;
             SqlDataReader dr = cmd.ExecuteReader();
-            List<DemandeService> listeDemandes = new List<DemandeService>();
-            while(dr.Read())
-            {
-              DemandeService demandeService = new DemandeService((DateTime)dr["date_enregistrement"], 
-                                                                 (DateTime)dr["date_realisation"], 
-                                                                 (string)dr["adresse_realisation"], 
-                                                                 (int)dr["id_ville"], 
-                                                                 (DateTime)dr["heure_realisation"]);
+            List<DemandeService> listeDemandes = new List<DemandeService>(); 
+                if (dr.HasRows)
+                {
+                 while(dr.Read())
 
-                listeDemandes.Add(demandeService);
+                {
+                    DemandeService demande = new DemandeService();
 
-             }
-            dr.Close();
+                    if (dr["id_Emetteur"]!=DBNull.Value)
+                    {
+                       demande.IdEmetteur = (int)dr["id_emetteur"];
+                    }
+                    if (dr["date_enregistrement"] != DBNull.Value)
+                    {
+                       demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
+                    }
+                    if (dr["date_realisation"] != DBNull.Value)
+                    {
+                        demande.DateRealisation = (DateTime)dr["date_realisation"];
+                    }
+                    if (dr["adresse_realisation"] != DBNull.Value)
+                    {
+                        demande.AdresseRealisation = (string)dr["adresse_realisation"];
+                    }
+                    if (dr["id_ville"] != DBNull.Value)
+                    {
+                        demande.VilleRealisation = (int)dr["id_ville"];
+                    }
+                    if(dr["id_type_service"] != DBNull.Value)
+                    {
+                        demande.IdTypeService = (int)dr["id_type_service"];
+                    }
+                    if (dr["date_annulation"] != DBNull.Value)
+                    {
+                        demande.DateAnnulation = (DateTime)dr["date_annulation"];
+                    }
+                    if(dr["date_annulation"] != DBNull.Value)
+                    {
+                        demande.DateCloture = (DateTime)dr["date_cloture"];
+                    }
+                    
+                    
+                   // demande. DateNonFinalisation = (DateTime)dr["date_non_finalisation"];                
+                    // demande. IdMotifAnnulation = (int)dr["id_motif_annulation"];
+
+                    listeDemandes.Add(demande);
+                    
+                }   
+            }
+
             cnx.Close();
+
+
             return listeDemandes;
 
-
         }
+
+
+        //declaration de l'evenement 
         
-       
+
+
+        //creation de l'event args qui comprend l'id de la demande selectionnee
+        
+
+            
+
+           
 
 
     }
+      
+
+
+
+
+    
 }

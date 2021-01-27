@@ -1,68 +1,102 @@
-﻿
+﻿@model Pandami2.Models.DemandeService
+
 @{
     ViewBag.Title = "RechercherUneDemande";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Rechercher une demande de service non pourvue</h2>
+<div class="jumbotron text-center">
 
-<div>
-   <h3>Choix des critères</h3>
+    <h2>Rechercher Une demande de service </h2>
 </div>
 
-<div>
-    <p>
-        <table>
-            <tr>
-                <td>
-                    <label for="typeservice">Type de service : </label>
-                    
-                </td>
 
-            <tr>
-                <td>
-                    <label for="catservice">Catégorie de service : </label>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="besoineqm">Besoin en équipement : </label>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="datereal">Date de réalisation</label>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="heurereal">Heure de réalisation : </label>
-                   
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="lieureal">Lieu de réalisation  </label>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <br />
+            <br />
+            
+            <form class=" form-inline" action="rechercher" method="get">
+                <div class="input-group">
+                    <select class="form-control">
+                        <option selected>Recherche par type de service</option>
+                        @foreach (var data in Model.ChargerListeTypeService())
+                        {
+                            <option value="1">@data</option>
+                        }
 
-                    <label name="numrue">N° et rue : </label>
-                   
-                    <label name="cp">Code Postal : </label>
-                   
-                    <label name="ville">Ville :</label>
+                    </select>
+                    <button class="form-control mr-sm h2 btn btn-default" type="submit">Rechercher</button>
 
-                    
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="nomutilisateur">Utilisateur à l'origine de la demande :</label>
-                </td>
-            </tr>
-        </table>
-    </p>
-    <p><a class="btn btn-default" href="">Répondre à cette demande</a></p>
+                </div>
+     
+            </form>
+        </div>
+
+        <div class="col-sm-9">
+            <h3>Liste des demandes de service en cours</h3>
+
+            @foreach (var item in Model.AfficherDemandes())
+            {
+                <form methode="post">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+
+                            @Html.DisplayNameFor(model => model.DateEnregistrement)
+                            @Html.DisplayFor(modelItem => item.DateEnregistrement)
+                            @Html.DisplayNameFor(model => model.IdEmetteur)
+                            @Html.DisplayFor(modelItem => item.IdEmetteur)
+
+                        </div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    @Html.DisplayNameFor(model => model.IdTypeService)
+                                    @Html.DisplayFor(modelItem => item.IdTypeService)
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.DateRealisation)
+                                        @Html.DisplayFor(modelItem => item.DateRealisation)
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.AdresseRealisation)
+                                        @Html.DisplayFor(modelItem => item.AdresseRealisation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.VilleRealisation)
+                                        @Html.DisplayFor(modelItem => item.VilleRealisation)
+                                    </td>
+
+                                </tr>
+
+                            </table>
+
+
+
+                            <input type="submit" value="Repondre" class="btn btn-default pull-right" />
+                            
+
+                </form>
+
+
+             }
+
+
+        </div>
+
+
+            
+                </div>
+           
+       
+      </div>
+ </div>
+    
 </div>
-
