@@ -57,6 +57,16 @@ namespace Pandami2.Controllers
 
         public ActionResult SuiviDesDemandes()
         {
+            DemandeServiceDao dao = new DemandeServiceDao();
+
+            ViewBag.idUtilisateur = 1;
+            // liste des demandes en cours
+            List<DemandeService> demandesEnCours = dao.GetDemandesEnCours(ViewBag.idUtilisateur);
+            ViewBag.demandesEnCours = demandesEnCours;
+
+            // TODO : idem pour autres demandes
+
+
             return View();
         }
     }

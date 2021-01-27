@@ -1,8 +1,7 @@
-﻿@model Pandami2.Models.DemandeService
+﻿@using Pandami2.Models
 
 @{
     ViewBag.Title = "SuiviDesDemandes";
-
 }
 
 <h2>Suivi des demandes</h2>
@@ -12,21 +11,25 @@
         <h3 class="titredem">Demandes en cours</h3>
         <div class="demandes">
             <!-- il manque un for each quelque part pour afficher plusieurs demandes -->
+            @foreach (DemandeService d in ViewBag.demandesEnCours)
+            {
+
+            
             <div>
                 <label class="lbl1">Pour cette demande vous êtes : </label>
-                <label class="lbl2">@Model.BenevoleOuBeneficiaire(Model.GetIdDemandeEnCours(1), 1)</label>
+                <label class="lbl2">@(d.IdEmetteur == ViewBag.idUtilisateur?"bénéficiaire":"benevole")</label>
             </div>
             <div>
                 <label class="lbl1">Date de réalisation : </label>
-                <label class="lbl2">@Model.ChargerDateService(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2">@d.DateRealisation</label>
             </div>
             <div>
                 <label class="lbl1">Heure de réalisation :</label>
-                <label class="lbl2">@Model.ChargerHeureService(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2">@d.HeureRealisation</label>
             </div>
             <div>
                 <label class="lbl1">Adresse de réalisation : </label>
-                <label class="lbl2">@Model.ChargerAdresseRealisation(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2">@d.AdresseRealisation</label>
             </div>
             <div>
                 <label class="lbl1">Type de service : </label>
@@ -46,24 +49,25 @@
             <div>
                 <button class="btnsuividem">Négocier la date et/ou l'heure de cette demande</button>
             </div>
+            }
         </div>
         <div class="demandes">
             <!-- il manque un for each quelque part pour afficher plusieurs demandes -->
             <div>
                 <label class="lbl1">Pour cette demande vous êtes : </label>
-                <label class="lbl2">@Model.BenevoleOuBeneficiaire(Model.GetIdDemandeEnCours(1), 1)</label>
+                <label class="lbl2"></label>
             </div>
             <div>
                 <label class="lbl1">Date de réalisation : </label>
-                <label class="lbl2">@Model.ChargerDateService(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2"></label>
             </div>
             <div>
                 <label class="lbl1">Heure de réalisation :</label>
-                <label class="lbl2">@Model.ChargerHeureService(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2"></label>
             </div>
             <div>
                 <label class="lbl1">Adresse de réalisation : </label>
-                <label class="lbl2">@Model.ChargerAdresseRealisation(Model.GetIdDemandeEnCours(1))</label>
+                <label class="lbl2"></label>
             </div>
             <div>
                 <label class="lbl1">Type de service : </label>
