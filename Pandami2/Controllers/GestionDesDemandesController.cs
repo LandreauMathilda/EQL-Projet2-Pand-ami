@@ -55,6 +55,7 @@ namespace Pandami2.Controllers
             return View(viewModelDemandeService);
         }
 
+
         public ActionResult SuiviDesDemandes()
         {
             DemandeServiceDao dao = new DemandeServiceDao();
@@ -69,5 +70,12 @@ namespace Pandami2.Controllers
 
             return View();
         }
+        public ActionResult ListeDesDemandes ()
+        {
+            DemandeService demande = new DemandeService();
+            return View(demande);
+        }
+
+
     }
 }

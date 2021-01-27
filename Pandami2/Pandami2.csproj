@@ -112,6 +112,27 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="VisioForge.Controls, Version=12.0.82.0, Culture=neutral, PublicKeyToken=5873e863f1bcda5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.Controls.UI, Version=12.0.82.0, Culture=neutral, PublicKeyToken=eafa6bd21aa991fd, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Controls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.Controls.UI.Dialogs, Version=12.0.82.0, Culture=neutral, PublicKeyToken=3d84672df68c33ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Controls.UI.Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.MediaFramework, Version=12.0.82.0, Culture=neutral, PublicKeyToken=14e66dd726c53f11, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.MediaFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.Shared, Version=12.0.82.0, Culture=neutral, PublicKeyToken=4cb7f6778cad43a2, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.Tools, Version=12.0.82.0, Culture=neutral, PublicKeyToken=33c6ded9724deec2, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="VisioForge.Types, Version=12.0.82.0, Culture=neutral, PublicKeyToken=722de1c1c0a7f49e, processorArchitecture=MSIL">
+      <HintPath>..\packages\VisioForge.DotNet.Core.TRIAL.12.0.82\lib\net46\VisioForge.Types.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -131,16 +152,23 @@
     <Compile Include="ClassesDao\DemandeServiceDao.cs" />
     <Compile Include="Controllers\GestionDesDemandesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DaoReponse.cs" />
+    <Compile Include="Models\DaoUtilisateur.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Reponse.cs" />
+    <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Equipement.cs" />
     <Compile Include="Models\TypeService.cs" />
     <Compile Include="Models\ViewModelDemandeService.cs" />
     <Compile Include="Models\Ville.cs" />
     <Compile Include="Models\DemandeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectionDemandeEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -179,11 +207,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Utilisateur\ConnexionInscription.cshtml" />
     <Content Include="Views\Utilisateur\Profil.cshtml" />
-    <Content Include="Views\GestionDesDemandes\DeposerUneDemande.cshtml" />
-    <Content Include="Views\GestionDesDemandes\RechercherUneDemande.cshtml" />
+    <Content Include="Views\GestionDesDemandes\ListeDesDemandes.cshtml" />
     <Content Include="Views\GestionDesDemandes\SuiviDesDemandes.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Utilisateur\Inscription.cshtml" />
+    <Content Include="Views\GestionDesDemandes\Reponse.cshtml" />
+    <Content Include="Views\GestionDesDemandes\RechercherUneDemande.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

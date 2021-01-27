@@ -1,0 +1,29 @@
+﻿@model Pandami2.Models.Login
+
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h2>Login</h2>
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <label for="Username">Username</label>
+            @Html.TextBoxFor(m => m.username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.username)
+        </div>
+        <div class="form-group">
+            <label for="Username">PassWord</label>
+            @Html.TextBoxFor(m => m.passeword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.passeword)
+        </div>
+        <p> @ViewBag.message </p>
+
+        <input type="submit" class="btn btn-default" value="Valider">
+    }
