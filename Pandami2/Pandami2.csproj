@@ -157,18 +157,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\DaoReponse.cs" />
     <Compile Include="Models\DaoUtilisateur.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Reponse.cs" />
     <Compile Include="Models\Utilisateur.cs" />
-=======
     <Compile Include="Models\Equipement.cs" />
     <Compile Include="Models\TypeService.cs" />
     <Compile Include="Models\ViewModelDemandeService.cs" />
     <Compile Include="Models\Ville.cs" />
->>>>>>> 3fe10349b9afb27f82cfaaa1123d141b58e64967
     <Compile Include="Models\DemandeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionDemandeEventArgs.cs" />
@@ -185,19 +182,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-<<<<<<< HEAD
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-=======
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
->>>>>>> 3fe10349b9afb27f82cfaaa1123d141b58e64967
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
