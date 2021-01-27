@@ -1,15 +1,276 @@
-﻿
+﻿@model Pandami2.Models.DemandeService
+
 @{
     ViewBag.Title = "SuiviDesDemandes";
+
 }
 
-<h2>Suivi des demandes en cours</h2>
-<div>
-    <div>
-        <h3></h3>
-    </div>
-    <div>
+<h2>Suivi des demandes</h2>
+<body id="bodydem">
+    <div class="suividem" id="demcours">
 
+        <h3 class="titredem">Demandes en cours</h3>
+        <div class="demandes">
+            <!-- il manque un for each quelque part pour afficher plusieurs demandes -->
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">@Model.BenevoleOuBeneficiaire(Model.GetIdDemandeEnCours(1), 1)</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation : </label>
+                <label class="lbl2">@Model.ChargerDateService(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2">@Model.ChargerHeureService(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2">@Model.ChargerAdresseRealisation(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Utilisateur concerné par cette demande : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Annuler cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Négocier la date et/ou l'heure de cette demande</button>
+            </div>
+        </div>
+        <div class="demandes">
+            <!-- il manque un for each quelque part pour afficher plusieurs demandes -->
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">@Model.BenevoleOuBeneficiaire(Model.GetIdDemandeEnCours(1), 1)</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation : </label>
+                <label class="lbl2">@Model.ChargerDateService(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2">@Model.ChargerHeureService(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2">@Model.ChargerAdresseRealisation(Model.GetIdDemandeEnCours(1))</label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Utilisateur concerné par cette demande : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Annuler cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Négocier la date et/ou l'heure de cette demande</button>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="suividem" id="dempassees">
+        <h3 class="titredem">Demandes passées</h3>
+        <div class="demandes">
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">Bénévole/Bénéficiaire</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Utilisateur concerné par cette demande : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Clôturer cette demande si elle a été effectuée</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Clôturer cette demande si elle n'a pas été effectuée</button>
+            </div>
+        </div>
+
+        <div class="demandes">
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">Bénévole/Bénéficiaire</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Utilisateur concerné par cette demande : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Clôturer cette demande si elle a été effectuée</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Clôturer cette demande si elle n'a pas été effectuée</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="suividem" id="demnonpourv">
+        <h3 class="titredem">Demandes non pourvues</h3>
+        <div class="demandes">
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">Bénévole/Bénéficiaire</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Modifier cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Suspendre cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Annuler cette demande</button>
+            </div>
+        </div>
+    </div>
+    <div class="suividem" id="demavalider">
+        <h3 class="titredem">Demandes à valider</h3>
+        <div class="demandes">
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">Bénéficiaire</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Modifier cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Suspendre cette demande</button>
+            </div>
+            <div>
+                <button class="btnsuividem">Annuler cette demande</button>
+            </div>
+        </div>
+    </div>
+    <div class="suividem" id="demenattente">
+        <h3 class="titredem">Demandes en attente de validation du bénéficiaire</h3>
+        <div class="demandes">
+            <div>
+                <label class="lbl1">Pour cette demande vous êtes : </label>
+                <label class="lbl2">Bénévole</label>
+            </div>
+            <div>
+                <label class="lbl1">Date de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Heure de réalisation :</label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Adresse de réalisation : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Type de service : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <label class="lbl1">Equipement nécessaire : </label>
+                <label class="lbl2"></label>
+            </div>
+            <div>
+                <button class="btnsuividem">Annuler ma participation à cette demande</button>
+            </div>
+        </div>
+    </div>
+</body>
+
 
