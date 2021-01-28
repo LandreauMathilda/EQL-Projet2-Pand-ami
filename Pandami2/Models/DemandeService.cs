@@ -25,6 +25,9 @@ namespace Pandami2.Models
         private DateTime dateCloture;
         private DateTime dateNonFinalisation;
         private int idMotifAnnulation;
+        private List<string> equipements;
+        private string nomBenevole;
+        private string codePostal;
 
 
         string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
@@ -43,6 +46,9 @@ namespace Pandami2.Models
         public string LibelleVilleRealisation { get => libelleVilleRealisation; set => libelleVilleRealisation = value; }
         public string LibelleTypeService { get => libelleTypeService; set => libelleTypeService = value; }
         public string NomPrenomEmetteur { get => nomPrenomEmetteur; set => nomPrenomEmetteur = value; }
+        public string NomBenevole { get => nomBenevole; set => nomBenevole = value; }
+        public string CodePostal { get => codePostal; set => codePostal = value; }
+        public List<string> Equipements { get => equipements; set => equipements = value; }
 
         public DemandeService(int idUtilisateur)
         {
@@ -87,7 +93,25 @@ namespace Pandami2.Models
 
         }
 
-
+        public DemandeService (DateTime dateRealisation, string adresseRealisation, string codePostal, string libelleVilleRealisation, string libelleTypeService, string nomBenevole, int idDemande)
+        {
+            this.dateRealisation = dateRealisation;
+            this.adresseRealisation = adresseRealisation;
+            this.codePostal = codePostal;
+            this.libelleVilleRealisation = libelleVilleRealisation;
+            this.libelleTypeService = libelleTypeService;
+            this.nomBenevole = nomBenevole;
+            this.idDemande = idDemande;
+        }
+        public DemandeService(DateTime dateRealisation, string adresseRealisation, string codePostal, string libelleVilleRealisation, string libelleTypeService, int idDemande)
+        {
+            this.dateRealisation = dateRealisation;
+            this.adresseRealisation = adresseRealisation;
+            this.codePostal = codePostal;
+            this.libelleVilleRealisation = libelleVilleRealisation;
+            this.libelleTypeService = libelleTypeService;
+            this.idDemande = idDemande;
+        }
     }
 
 

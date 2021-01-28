@@ -214,6 +214,7 @@
     <Content Include="Views\Utilisateur\Inscription.cshtml" />
     <Content Include="Views\GestionDesDemandes\Reponse.cshtml" />
     <Content Include="Views\GestionDesDemandes\RechercherUneDemande.cshtml" />
+    <Content Include="Views\GestionDesDemandes\DeposerUneDemande.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

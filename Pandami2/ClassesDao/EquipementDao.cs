@@ -58,5 +58,34 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
+
+        public List<string> RecupererListeEquipement(int idDemande)
+        {
+            List<string> libelleEquipement = new List<string>();
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetListeEquipement";
+            SqlParameter param2 = new SqlParameter("@IdDemande", idDemande);
+            cmd.Parameters.Add(param2);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    libelleEquipement.Add((string)dr["libelle_equipement"]);
+                }
+            }
+            else
+            {
+                libelleEquipement.Add("Aucun equipement nécessaire");
+            }
+            cnx.Close();
+
+            return libelleEquipement; 
+        }
     }
 }

@@ -5032,6 +5032,7 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
+    height : 15vh;
     padding-top: 30px;
     padding-bottom: 30px;
     margin-bottom: 30px;
@@ -6832,7 +6833,7 @@ button.close {
   }
 }
 #imgpandami{
-    width : 30vw;
+    height : 30vh;
     display : block;
     margin-left : auto;
     margin-right : auto;
@@ -6842,6 +6843,7 @@ button.close {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    height : 60vh;
 }
 
 #blocaccueil {
@@ -6851,8 +6853,9 @@ button.close {
     background-color: #f9e68d;
  align-items : center;
 }
-#blocpresentation, #blocaccueil{
+#blocpresentation, #blocaccueil, #bodydepot{
     width : 78vw;
+    
 }
 
 #blocgauche, #blocdroit {
@@ -6860,6 +6863,73 @@ button.close {
      width: 36.5vw;
     text-align: center;
     
+}
+.demandes {
+    border: 0.3vh solid black;
+    margin-right: 3vw;
+    margin-bottom: 1vw;
+    margin-left: 10vw;
+    padding: 0.5vh;
+    border-radius: 5px;
+    width: 50vw;
+    display: grid;
+    height: auto;
+    background-color: #f9eaa1;
+}
+
+#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours, #depotdem {
+    margin: 1vh;
+    padding: 1vh;
+    flex-basis: 7vw;
+    background-color: #f9e68d;
+    align-content: center;
+}
+.row {
+    background-color: #f9e68d;
+}
+.bodydem
+{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 75vw;
+}
+
+
+.titredem {
+    text-align: center;
+    font-size: 3vh;
+}
+
+.btnsuividem {
+    padding: 0.5vh;
+    margin: 0.5vh;
+    font-size: 1.75vh;
+    float: right;
+}
+
+.lbl1 {
+    font-size: 1.75vh;
+}
+
+.lbl2 {
+    font-size: 1.7vh;
+    float: right;
+    
+}
+#equip {
+    float: right;
+    text-align: right;
+}
+#equiplbl{
+    text-align : right;
+}
+.suividem,
+.bodydepo {
+    background-color: #fbf9ec;
 }
 
 
