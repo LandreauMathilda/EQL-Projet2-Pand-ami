@@ -43,8 +43,12 @@ namespace Pandami2.Controllers
 
         public ActionResult RechercherUneDemande()
         {
-            ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
-            return View(viewModelDemandeService);
+            DemandeServiceDao demandeServiceDao = new DemandeServiceDao();
+            ViewBag.listeDemandes = demandeServiceDao.AfficherDemandes();
+            ViewBag.utilisateur = 1;
+            TypeServiceDao typeServiceDao = new TypeServiceDao();
+            ViewBag.listeTypeService = typeServiceDao.ChargerListeTypeService();
+            return View();
         }
 
         [HttpPost]
