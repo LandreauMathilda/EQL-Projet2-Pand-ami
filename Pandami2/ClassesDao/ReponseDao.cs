@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
+
 namespace Pandami2.Models
 {
     public class DaoReponse
@@ -15,7 +16,7 @@ namespace Pandami2.Models
             string connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
             cnx = new SqlConnection(connectionstring);
         }
-        public void AjoutReponse(Reponse reponse)
+        public Reponse AjoutReponse(int idUtilisateur,int idDemande)
         {
             connection();
             SqlCommand cmd = new SqlCommand();
@@ -24,25 +25,21 @@ namespace Pandami2.Models
             cmd.CommandType = System.Data.CommandType.Text;
 
             cmd.Parameters.Add(new SqlParameter("@date_reponse", DateTime.Now));
-            cmd.Parameters.Add(new SqlParameter("@id_utilisateur", reponse.Id_utilisateur));
-            cmd.Parameters.Add(new SqlParameter("@id_demande", reponse.Id_demande));
+            cmd.Parameters.Add(new SqlParameter("@id_utilisateur", idUtilisateur));
+            cmd.Parameters.Add(new SqlParameter("@id_demande", idDemande));
+            Reponse reponse = new Reponse(idUtilisateur, idDemande, DateTime.Now);
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
+            return reponse;
+           
 
+            
         }
 
 
 
-        //je dois recuperer id-utilisateur =benevole:
-
-
-        // je dois recuperer id-demande:
-        // quand je clique le bouton repondre : un message de confirmation s'affiche "vous acceptez de repondre a cette demande cliquez sui pour confirmer"
-        // une methode qui envoie les informations de la demande à la base de données reponse
         
-        public event EventHandler OnClick;
-
 
 
 

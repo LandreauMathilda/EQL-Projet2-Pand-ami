@@ -44,8 +44,15 @@ namespace Pandami2.Models
             this.demande = demande;
         }
 
-        //recuperation de l'id demande de service selectionnee
-       
+        public Reponse(int id_utilisateur, int id_demande, DateTime date_reponse)
+        {
+            this.id_utilisateur = id_utilisateur;
+            this.id_demande = id_demande;
+            this.date_reponse = date_reponse;
+        }
+
+        
+
 
     }
 }

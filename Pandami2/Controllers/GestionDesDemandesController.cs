@@ -18,8 +18,8 @@ namespace Pandami2.Controllers
 
         public ActionResult DeposerUneDemande()
         {
-            ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
-            return View(viewModelDemandeService);
+            //ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
+            return View();
         }
 
         [HttpPost]
@@ -41,6 +41,8 @@ namespace Pandami2.Controllers
             return View(viewModelDemandeService);
         }
 
+       
+
         public ActionResult RechercherUneDemande()
         {
             ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
@@ -50,9 +52,17 @@ namespace Pandami2.Controllers
         [HttpPost]
         public ActionResult RechercherUneDemande(int idUtilisateur, int idDemande)
         {
-            // faire une méthode qui à partir de idUtilisateur et idDemande insère dans la table reponse un idUtilisateur, un idDemande
-            ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
-            return View(viewModelDemandeService);
+
+            DaoReponse rbd = new DaoReponse();
+            rbd.AjoutReponse(idUtilisateur,idDemande);
+            
+            return View ();
+        }
+        public ActionResult RechercherUneDemade(int id_type)
+        {
+            DemandeServiceDao d = new DemandeServiceDao();
+            d.RechercherParType(id_type);
+            return View();
         }
 
 
@@ -70,11 +80,7 @@ namespace Pandami2.Controllers
 
             return View();
         }
-        public ActionResult ListeDesDemandes ()
-        {
-            DemandeService demande = new DemandeService();
-            return View(demande);
-        }
+       
 
 
     }

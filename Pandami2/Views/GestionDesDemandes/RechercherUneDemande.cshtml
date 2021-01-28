@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <br />
+
             <br />
             <form class="form-inline" action="" method="post">
                 <div class="input-group">
@@ -32,7 +32,7 @@
             <h3>Liste des demandes de service en cours</h3>
             @foreach (var item in Model.DemServiceDao.AfficherDemandes())
             {
-                <form methode="post">
+                <form methode="post" name="form1">
                     <input type="text" name="idUtilisateur" value="@Model.IdEmetteur">
                     <input type="text" name="idDemande" value="@item.IdDemande">
                     <div class="panel panel-default">
@@ -60,10 +60,73 @@
                                 </tr>
                             </table>
                         </div>
-                        <input type="submit" value="Repondre" class="btn btn-default pull-right" />
+                        <div>
+
+                            <input type="submit" value="Repondre" class="btn btn-default pull-right" onclick="hideThis('form1')" />
+
+                        </div>
+
+
                     </div>
                 </form>
             }
+
         </div>
-    </div>
+
+    </div>   
+        <div class="row">
+            <div class="col-lg-3">
+                <p> Suite</p>
+            </div>
+
+               
+                <div class="col-md-9">
+                    <h3>Resultat de la recherche</h3>
+                    @foreach (var item in Model.DemServiceDao.AfficherDemandes())
+                    {
+                        <form methode="post" name="form1">
+                            <input type="text" name="idUtilisateur" value="@Model.IdEmetteur">
+                            <input type="text" name="idDemande" value="@item.IdDemande">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <label for="dateEnregistrement"> Date enregistrement </label>
+                                    <input type="text" id="dateEnregistrement" value="@item.DateEnregistrement" />
+                                    <label> Emetteur </label>
+                                    <label id="idEmetteur" name="idEmetteur"> @item.IdEmetteur </label>
+                                </div>
+                                <div class="panel-body">
+                                    <table>
+                                        <tr>
+                                            <td> Type de service </td>
+                                            <td> @item.IdTypeService </td>
+                                        <tr>
+                                            <td> Date de réalisation </td>
+                                            <td> @item.DateRealisation </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Adresse de réalisation </td>
+                                            <td> @item.AdresseRealisation </td>
+                                        <tr>
+                                            <td> Ville de réalisation </td>
+                                            <td> @item.VilleRealisation </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+
+                                    <input type="submit" value="Repondre" class="btn btn-default pull-right" onclick="hideThis('form1')" />
+
+                                </div>
+
+
+                            </div>
+                        </form>
+                    }
+                </div>
+
+        </div>
+
 </div>
+
+    
+

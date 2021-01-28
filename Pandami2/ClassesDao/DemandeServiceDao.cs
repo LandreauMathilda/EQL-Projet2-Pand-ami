@@ -5,6 +5,7 @@ using System.Web;
 using System.Configuration;
 using System.Data.SqlClient;
 using Pandami2.Models;
+using Pandami2.ClassesDao;
 
 namespace Pandami2.ClassesDao
 {
@@ -91,6 +92,8 @@ namespace Pandami2.ClassesDao
                 }
             }
             cnx.Close();
+             
+            
             return listeDemandes;
         }
 
@@ -136,5 +139,52 @@ namespace Pandami2.ClassesDao
             cnx.Close();
             return listeDemandes;
         }
+
+        public void RechercherParType(int type)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "SELECT id_emetteur,date_enregistrement,date_realisation,adresse_realisation,id_ville,id_type_service FROM demande_service where id_type_service = @id_type ";
+            cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeParType = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((int)dr["id_emetteur"]);
+                    demande.IdDemande = (int)dr["id_demande"];
+                    demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
+                    demande.DateRealisation = (DateTime)dr["date_realisation"];
+                    if (dr["adresse_realisation"] != DBNull.Value)
+                    {
+                        demande.AdresseRealisation = (string)dr["adresse_realisation"];
+                    }
+                    if (dr["id_ville"] != DBNull.Value)
+                    {
+                        demande.VilleRealisation = (int)dr["id_ville"];
+                    }
+                    demande.IdTypeService = (int)dr["id_type_service"];
+                    if (dr["date_annulation"] != DBNull.Value)
+                    {
+                        demande.DateAnnulation = (DateTime)dr["date_annulation"];
+                    }
+                    if (dr["date_cloture"] != DBNull.Value)
+                    {
+                        demande.DateCloture = (DateTime)dr["date_cloture"];
+                    }
+                    listeParType.Add(demande);
+                }
+            }
+            cnx.Close();
+        }
+
     }
-}
+
+        
+    }
+
