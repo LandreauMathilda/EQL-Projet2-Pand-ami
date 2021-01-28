@@ -59,7 +59,24 @@ namespace Pandami2.ClassesDao
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "SELECT * FROM demande_service";
+            cmd.CommandText = "SELECT ut.nom, " +
+                                     "ut.prenom, " +
+                                     "ds.id_demande, " +
+                                     "ds.id_emetteur, " +
+                                     "ds.date_enregistrement, " +
+                                     "ds.date_realisation, " +
+                                     "case when ds.adresse_realisation is null then ut.adresse else ds.adresse_realisation end as adresse_realisation, " +
+                                     "ut.id_ville, " +
+                                     "case when vi.libelle_ville is null then (" +
+                                                                          "SELECT libelle_ville FROM ville WHERE id_ville=ut.id_ville) else vi.libelle_ville end as libelle_ville, " +
+                                     "ts.libelle_type_service, " +
+                                     "ds.date_annulation, " +
+                                     "ds.date_cloture, " +
+                                     "ds.date_non_finalisation, " +
+                                     "ds.id_motif_annulation " +
+                              "FROM demande_service ds INNER JOIN utilisateur ut on ds.id_emetteur=ut.id_utilisateur " +
+                                                      "INNER JOIN ville vi ON ds.id_ville=vi.id_ville " +
+                                                      "INNER JOIN type_service ts ON ds.id_type_service=ts.id_type_service;";
             cmd.CommandType = System.Data.CommandType.Text;
             SqlDataReader dr = cmd.ExecuteReader();
             List<DemandeService> listeDemandes = new List<DemandeService>();
@@ -68,18 +85,13 @@ namespace Pandami2.ClassesDao
                 while (dr.Read())
                 {
                     DemandeService demande = new DemandeService((int)dr["id_emetteur"]);
+                    demande.NomPrenomEmetteur = (string)dr["nom"] + " " + (string)dr["prenom"];
                     demande.IdDemande = (int)dr["id_demande"];
                     demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
                     demande.DateRealisation = (DateTime)dr["date_realisation"];
-                    if (dr["adresse_realisation"] != DBNull.Value)
-                    {
-                        demande.AdresseRealisation = (string)dr["adresse_realisation"];
-                    }
-                    if (dr["id_ville"] != DBNull.Value)
-                    {
-                        demande.VilleRealisation = (int)dr["id_ville"];
-                    }
-                    demande.IdTypeService = (int)dr["id_type_service"];
+                    demande.AdresseRealisation = (string)dr["adresse_realisation"];
+                    demande.LibelleVilleRealisation = (string)dr["libelle_ville"];
+                    demande.LibelleTypeService = (string)dr["libelle_type_service"];
                     if (dr["date_annulation"] != DBNull.Value)
                     {
                         demande.DateAnnulation = (DateTime)dr["date_annulation"];
