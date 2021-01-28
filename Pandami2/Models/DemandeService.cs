@@ -38,7 +38,6 @@ namespace Pandami2.Models
         public DateTime DateCloture { get => dateCloture; set => dateCloture = value; }
         public DateTime DateNonFinalisation { get => dateNonFinalisation; set => dateNonFinalisation = value; }
         public int IdMotifAnnulation { get => idMotifAnnulation; set => idMotifAnnulation = value; }
-
         public DemandeService(int idUtilisateur)
         {
             this.idEmetteur = idUtilisateur;
@@ -57,6 +56,7 @@ namespace Pandami2.Models
             this.idEmetteur = idEmetteur;//  ==utilisateur qui a créé la demande
 
         }
+
 
         //Constructeur vide
         public DemandeService()

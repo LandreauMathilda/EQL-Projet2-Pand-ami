@@ -62,8 +62,8 @@ namespace Pandami2.Controllers
 
             ViewBag.idUtilisateur = 1;
             // liste des demandes en cours
-            List<DemandeService> demandesEnCours = dao.GetDemandesEnCours(ViewBag.idUtilisateur);
-            ViewBag.demandesEnCours = demandesEnCours;
+            List<DemandeService> demandesEnCoursBeneficiaire = dao.GetDemandesEnCoursBeneficiaire(ViewBag.idUtilisateur);
+            ViewBag.demandesEnCours = demandesEnCoursBeneficiaire;
 
             // TODO : idem pour autres demandes
 

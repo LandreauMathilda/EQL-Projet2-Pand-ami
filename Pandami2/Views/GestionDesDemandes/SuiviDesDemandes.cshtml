@@ -11,13 +11,13 @@
         <h3 class="titredem">Demandes en cours</h3>
         <div class="demandes">
             <!-- il manque un for each quelque part pour afficher plusieurs demandes -->
-            @foreach (DemandeService d in ViewBag.demandesEnCours)
+            @foreach (DemandeService d in ViewBag.demandesEnCoursBeneficiaire)
             {
 
             
             <div>
                 <label class="lbl1">Pour cette demande vous êtes : </label>
-                <label class="lbl2">@(d.IdEmetteur == ViewBag.idUtilisateur?"bénéficiaire":"benevole")</label>
+                <label class="lbl2">Bénéficiaire</label>
             </div>
             <div>
                 <label class="lbl1">Date de réalisation : </label>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <label class="lbl1">Type de service : </label>
-                <label class="lbl2"></label>
+                <label class="lbl2">@d.IdTypeService</label>
             </div>
             <div>
                 <label class="lbl1">Equipement nécessaire : </label>
