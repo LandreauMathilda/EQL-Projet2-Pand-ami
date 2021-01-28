@@ -32,8 +32,8 @@
             <h3>Liste des demandes de service en cours</h3>
             @foreach (var item in ViewBag.listeDemandes)
             {
-                <form methode="post">
-                    <input type="text" name="idUtilisateur" value="@Model.IdEmetteur">
+                <form method="post" action="RechercherUneDemande">
+                    <input type="text" name="idUtilisateur" value="@ViewBag.utilisateur">
                     <input type="text" name="idDemande" value="@item.IdDemande">
                     <div class="panel panel-default">
                         <div class="panel-heading">

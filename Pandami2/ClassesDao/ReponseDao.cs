@@ -16,22 +16,22 @@ namespace Pandami2.Models
             string connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
             cnx = new SqlConnection(connectionstring);
         }
-        public Reponse AjoutReponse(int idUtilisateur,int idDemande)
+        public void AjoutReponse(int idUtilisateur,int idDemande)
         {
             connection();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "Insert into reponse  values (@date_reponse,@id_utilisateur,@id_demande)";
+            cmd.CommandText = "Insert into reponse (date_reponse,id_utilisateur,id_demande)  values (@date_reponse,@id_utilisateur,@id_demande)";
             cmd.CommandType = System.Data.CommandType.Text;
 
             cmd.Parameters.Add(new SqlParameter("@date_reponse", DateTime.Now));
             cmd.Parameters.Add(new SqlParameter("@id_utilisateur", idUtilisateur));
             cmd.Parameters.Add(new SqlParameter("@id_demande", idDemande));
-            Reponse reponse = new Reponse(idUtilisateur, idDemande, DateTime.Now);
+            //Reponse reponse = new Reponse(idUtilisateur, idDemande, DateTime.Now);
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
-            return reponse;
+            //return reponse;
            
 
             

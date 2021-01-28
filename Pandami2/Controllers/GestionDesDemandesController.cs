@@ -47,7 +47,7 @@ namespace Pandami2.Controllers
         {
             DemandeServiceDao demandeServiceDao = new DemandeServiceDao();
             ViewBag.listeDemandes = demandeServiceDao.AfficherDemandes();
-            ViewBag.utilisateur = 1;
+            ViewBag.utilisateur = 2;
             TypeServiceDao typeServiceDao = new TypeServiceDao();
             ViewBag.listeTypeService = typeServiceDao.ChargerListeTypeService();
             return View();
@@ -60,14 +60,9 @@ namespace Pandami2.Controllers
             DaoReponse rbd = new DaoReponse();
             rbd.AjoutReponse(idUtilisateur,idDemande);
             
-            return View ();
+            return  RedirectToAction ("RechercherUneDemande");
         }
-        public ActionResult RechercherUneDemade(int id_type)
-        {
-            DemandeServiceDao d = new DemandeServiceDao();
-            d.RechercherParType(id_type);
-            return View();
-        }
+        
 
 
         public ActionResult SuiviDesDemandes()
