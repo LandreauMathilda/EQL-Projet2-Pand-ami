@@ -109,7 +109,7 @@ namespace Pandami2.ClassesDao
             return listeDemandes;
         }
 
-        public List<DemandeService> GetDemandesEnCours(int idUtilisateur)
+        public List<DemandeService> GetDemandesEnCoursBeneficiaire(int idUtilisateur)
         {
             SqlConnection cnx = new SqlConnection();
             cnx.ConnectionString = connStr;
@@ -117,34 +117,84 @@ namespace Pandami2.ClassesDao
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetDemandeEnCoursBeneficiaire";
+            cmd.CommandText = "dbo.GetInfosDemandesEnCoursBeneficiaire";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
             SqlDataReader dr = cmd.ExecuteReader();
             List<DemandeService> listeDemandes = new List<DemandeService>();
             if (dr.HasRows)
             {
                 while (dr.Read())
                 {
-                    DemandeService demande = new DemandeService((int)dr["id_emetteur"]);
-                    demande.IdDemande = (int)dr["id_demande"];
-                    demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
-                    demande.DateRealisation = (DateTime)dr["date_realisation"];
-                    if (dr["adresse_realisation"] != DBNull.Value)
-                    {
-                        demande.AdresseRealisation = (string)dr["adresse_realisation"];
-                    }
-                    if (dr["id_ville"] != DBNull.Value)
-                    {
-                        demande.VilleRealisation = (int)dr["id_ville"];
-                    }
-                    demande.IdTypeService = (int)dr["id_type_service"];
-                    if (dr["date_annulation"] != DBNull.Value)
-                    {
-                        demande.DateAnnulation = (DateTime)dr["date_annulation"];
-                    }
-                    if (dr["date_cloture"] != DBNull.Value)
-                    {
-                        demande.DateCloture = (DateTime)dr["date_cloture"];
-                    }
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"], 
+                                                                (string)dr["adresse_realisation"], 
+                                                                (string)dr["code_postal"], 
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (string)dr["nom"]+" "+dr["prenom"],
+                                                                (int)dr["id_demande"]);
+                    
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
+        public List<DemandeService> GetDemandesEnCoursBenevole(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesEnCoursBenevole";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (string)dr["nom"] + " " + dr["prenom"],
+                                                                (int)dr["id_demande"]);
+
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
+        public List<DemandeService> GetDemandesNonPourvues(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesNonPourvues";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (int)dr["id_demande"]);
+
                     listeDemandes.Add(demande);
                 }
             }

@@ -1,133 +1,148 @@
 ﻿@model Pandami2.Models.ViewModelDemandeService
+@{
+    ViewBag.Title = "Déposer une demande";
+}
 
+<div class="jumbotron text-center">
     <h2>Déposer une demande de service</h2>
-    <form method="post" action="" onsubmit="return validation()">
+</div>
+<body>
+    <div class="suividem" id="depotdem">
+        <form method="post" action="" onsubmit="return validation()">
+            <br />
+            <input type="text" id="idEmetteur" name="idEmetteur" value="@Model.IdEmetteur" hidden />
+            <table>
+                <tr>
+                    <td>
+                        <label for="idTypeService">Veuillez selectionner un type de service : </label>
+                    </td>
+                    <td>
+                        <select id="idTypeService" name="idTypeService" onchange="supprBordureRouge()">
+                            <option value=""> Choisir un type de service </option>
+                            @{ foreach (KeyValuePair
+                             <int, string>
+                                 kvp in Model.TypeServDao.ChargerListeTypeService())
+                                {
+                                    <option value="@kvp.Key"> @kvp.Value </option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="besoineqm">Besoin en équipement </label>
+                    </td>
+                    <td>
+                        <select name="idEquipement" id="idEquipement" multiple>
+                            <option value=""> Choisissez un équipement </option>
+                            @{ foreach (KeyValuePair
+                             <int, string>
+                                 kvp in Model.EquipmtDao.ChargerListeEquipements())
+                                {
+                                    <option value="@kvp.Key"> @kvp.Value </option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="datereal">Date de réalisation</label>
+                    </td>
+                    <td>
+                        <input type="date" id="dateRealisation" name="dateRealisation" onchange="supprBordureRouge()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="heurereal">Heure de réalisation </label>
+                    </td>
+                    <td>
+                        <input type="time" name="heureRealisation" id="heureRealisation" onchange="supprBordureRouge()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label name="lieureal">Lieu de réalisation (si différent du lieu de résidence) </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label name="numrue">N° et rue </label>
+                    </td>
+                    <td>
+                        <input type="text" name="numrue" id="adresseRealisation" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="ville">Ville :</label>
+                    </td>
+                    <td>
+                        <select id="ville" name="idVille">
+                            <option value=""> Choisissez une ville </option>
+                            @{ foreach (KeyValuePair
+                             <int, string>
+                                 kvp in Model.VilDao.ChargerListeVille())
+                                {
+                                    <option value="@kvp.Key"> @kvp.Value </option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input type="text" name="dateEnregistrement" value="@DateTime.Now.ToString()" hidden />
+            <input type="submit" value="valider" />
+        </form>
         <br />
-        <input type="text" id="idEmetteur" name="idEmetteur" value="@Model.IdEmetteur" hidden />
-        <table>
-            <tr>
-                <td>
-                    <label for="idTypeService">Type de service </label>
-                </td>
-                <td>
-                    <select id="idTypeService" name="idTypeService" onchange="supprBordureRouge()">
-                        <option value=""> Choisissez un type de service </option>
-                        @{ foreach (KeyValuePair<int, string> kvp in Model.TypeServDao.ChargerListeTypeService())
-                            {
-                                <option value="@kvp.Key"> @kvp.Value </option>
-                            }
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="besoineqm">Besoin en équipement </label>
-                </td>
-                <td>
-                    <select name="idEquipement" id="idEquipement" multiple>
-                        <option value=""> Choisissez un équipement </option>
-                        @{ foreach (KeyValuePair<int, string> kvp in Model.EquipmtDao.ChargerListeEquipements())
-                            {
-                                <option value="@kvp.Key"> @kvp.Value </option>
-                            }
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="datereal">Date de réalisation</label>
-                </td>
-                <td>
-                    <input type="date" id="dateRealisation" name="dateRealisation" onchange="supprBordureRouge()" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="heurereal">Heure de réalisation </label>
-                </td>
-                <td>
-                    <input type="time" name="heureRealisation" id="heureRealisation" onchange="supprBordureRouge()" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="lieureal">Lieu de réalisation (si différent du lieu de résidence) </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label name="numrue">N° et rue </label>
-                </td>
-                <td>
-                    <input type="text" name="numrue" id="adresseRealisation" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="ville">Ville :</label>
-                </td>
-                <td>
-                    <select id="ville" name="idVille">
-                        <option value=""> Choisissez une ville </option>
-                        @{ foreach (KeyValuePair<int, string> kvp in Model.VilDao.ChargerListeVille())
-                            {
-                                <option value="@kvp.Key"> @kvp.Value </option>
-                            }
-                        }
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <input type="text" name="dateEnregistrement" value="@DateTime.Now.ToString()" hidden />
-        <input type="submit" value="valider" />
-    </form>
-    <br/>
-    <div>@ViewBag.Message</div>
-    <button type="submit" onclick="entrerValeurs()"> Demo </button>
-    <script>
-        //permet de vérifier la saisie des champs obligatoires
-        function validation() {
-            var typeService = document.getElementById("idTypeService");
-            var dateRealisation = document.getElementById("dateRealisation");
-            var heureRealisation = document.getElementById("heureRealisation");
-            var valOk = true;
-            if (typeService.options[typeService.selectedIndex].value == 0) {
-                typeService.style.border = "2px solid #FF0000";
-                valOk = false;
+        <div>@ViewBag.Message</div>
+        <button type="submit" onclick="entrerValeurs()"> Demo </button>
+        <script>
+            //permet de vérifier la saisie des champs obligatoires
+            function validation() {
+                var typeService = document.getElementById("idTypeService");
+                var dateRealisation = document.getElementById("dateRealisation");
+                var heureRealisation = document.getElementById("heureRealisation");
+                var valOk = true;
+                if (typeService.options[typeService.selectedIndex].value == 0) {
+                    typeService.style.border = "2px solid #FF0000";
+                    valOk = false;
+                }
+                if (dateRealisation.value == 0) {
+                    dateRealisation.style.border = "2px solid #FF0000";
+                    valOk = false;
+                }
+                if (heureRealisation.value == 0) {
+                    heureRealisation.style.border = "2px solid #FF0000";
+                    valOk = false;
+                }
+                if (valOk == false) {
+                    alert("Veuillez renseigner les champs en rouge");
+                    return false;
+                }
+            };
+            //permet de saisir les champs obligatoires pour la demo
+            function entrerValeurs() {
+                var typeService = document.getElementById("idTypeService");
+                typeService.options[4].selected = true;
+                typeService.style.border = "1px solid #000000";
+                var idEquipement = document.getElementById("idEquipement");
+                idEquipement.options[2].selected = true;
+                idEquipement.options[3].selected = true;
+                idEquipement.style.border = "1px solid #000000";
+                document.getElementById("dateRealisation").value = "2021-02-15";
+                document.getElementById("dateRealisation").style.border = "1px solid #000000";
+                document.getElementById("heureRealisation").value = "10:00";
+                document.getElementById("heureRealisation").style.border = "1px solid #000000";
+            };
+            //permet de supprimer les bordures rouges au moment de la saisie si un champ n'avait pas été rempli
+            function supprBordureRouge() {
+                var baliseTarget = event.target;
+                baliseTarget.style.border = "1px solid #000000";
             }
-            if (dateRealisation.value == 0) {
-                dateRealisation.style.border = "2px solid #FF0000";
-                valOk = false;
-            }
-            if (heureRealisation.value == 0) {
-                heureRealisation.style.border = "2px solid #FF0000";
-                valOk = false;
-            }
-            if (valOk == false) {
-                alert("Veuillez renseigner les champs en rouge");
-                return false;
-            }
-        };
-        //permet de saisir les champs obligatoires pour la demo
-        function entrerValeurs() {
-            var typeService = document.getElementById("idTypeService");
-            typeService.options[4].selected = true;
-            typeService.style.border = "1px solid #000000";
-            var idEquipement = document.getElementById("idEquipement");
-            idEquipement.options[2].selected = true;
-            idEquipement.options[3].selected = true;
-            idEquipement.style.border = "1px solid #000000";
-            document.getElementById("dateRealisation").value = "2021-02-15";
-            document.getElementById("dateRealisation").style.border = "1px solid #000000";
-            document.getElementById("heureRealisation").value = "10:00";
-            document.getElementById("heureRealisation").style.border = "1px solid #000000";
-        };
-        //permet de supprimer les bordures rouges au moment de la saisie si un champ n'avait pas été rempli
-        function supprBordureRouge() {
-            var baliseTarget = event.target;
-            baliseTarget.style.border = "1px solid #000000";
-        }
 
-    </script>
+        </script>
+        </div>
+</body>

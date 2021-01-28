@@ -71,9 +71,30 @@ namespace Pandami2.Controllers
 
             ViewBag.idUtilisateur = 1;
             // liste des demandes en cours
-            List<DemandeService> demandesEnCours = dao.GetDemandesEnCours(ViewBag.idUtilisateur);
-            ViewBag.demandesEnCours = demandesEnCours;
+            List<DemandeService> demandesEnCoursBeneficiaire = dao.GetDemandesEnCoursBeneficiaire(ViewBag.idUtilisateur);
+            ViewBag.demandesEnCours = demandesEnCoursBeneficiaire;
+            foreach (DemandeService demande in ViewBag.demandesEnCours)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
+            }
+            List<DemandeService> demandesEnCoursBenevole = dao.GetDemandesEnCoursBenevole(ViewBag.idUtilisateur);
+            ViewBag.demandesEnCoursBenevole = demandesEnCoursBenevole;
+            foreach (DemandeService demande in ViewBag.demandesEnCoursBenevole)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
+
+            }
+            List<DemandeService> demandesNonPourvues = dao.GetDemandesNonPourvues(ViewBag.idUtilisateur);
+            ViewBag.demandesNonPourvues = demandesNonPourvues;
+            foreach (DemandeService demande in ViewBag.demandesNonPourvues)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
+
+            }
             // TODO : idem pour autres demandes
 
 
