@@ -12,12 +12,15 @@ namespace Pandami2.Models
     {
         private int idDemande;
         private int idEmetteur;
+        private string nomPrenomEmetteur;
         private DateTime dateEnregistrement;
         private DateTime dateRealisation;
         private string adresseRealisation;
         private int villeRealisation;
+        private string libelleVilleRealisation;
         private DateTime heureRealisation;
         private int idTypeService;
+        private string libelleTypeService;
         private DateTime dateAnnulation;
         private DateTime dateCloture;
         private DateTime dateNonFinalisation;
@@ -26,7 +29,6 @@ namespace Pandami2.Models
 
         string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
         public int IdDemande { get => idDemande; set => idDemande = value; }
-
         public int IdEmetteur { get => idEmetteur; set => idEmetteur = value; }
         public DateTime DateEnregistrement { get => dateEnregistrement; set => dateEnregistrement = value; }
         public DateTime DateRealisation { get => dateRealisation; set => dateRealisation = value; }
@@ -38,6 +40,9 @@ namespace Pandami2.Models
         public DateTime DateCloture { get => dateCloture; set => dateCloture = value; }
         public DateTime DateNonFinalisation { get => dateNonFinalisation; set => dateNonFinalisation = value; }
         public int IdMotifAnnulation { get => idMotifAnnulation; set => idMotifAnnulation = value; }
+        public string LibelleVilleRealisation { get => libelleVilleRealisation; set => libelleVilleRealisation = value; }
+        public string LibelleTypeService { get => libelleTypeService; set => libelleTypeService = value; }
+        public string NomPrenomEmetteur { get => nomPrenomEmetteur; set => nomPrenomEmetteur = value; }
 
         public DemandeService(int idUtilisateur)
         {
