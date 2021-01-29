@@ -8,6 +8,7 @@
     padding-left: 1vw;
     padding-right: 1vw;
     align-items : center;
+    margin : auto;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

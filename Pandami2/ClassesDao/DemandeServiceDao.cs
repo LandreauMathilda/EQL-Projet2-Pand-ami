@@ -233,8 +233,99 @@ namespace Pandami2.ClassesDao
             cnx.Close();
             return listeDemandes;
         }
+        public List<DemandeService> GetDemandesACloturerBeneficiaire(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesACloturer";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (string)dr["nom"] + " " + dr["prenom"],
+                                                                (int)dr["id_demande"]);
 
-        public void RechercherParType(int type)
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
+        public List<DemandeService> GetDemandesACloturerBenevole(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesACloturerBenevole";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (int)dr["id_demande"]);
+
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
+        public List<DemandeService> GetDemandesAValiderParBeneficiaire(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesAValiderParBeneficiaire";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (string)dr["nom"] + " " + dr["prenom"],
+                                                                (int)dr["id_demande"]);
+
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
+            public void RechercherParType(int type)
         {
             SqlConnection cnx = new SqlConnection();
             cnx.ConnectionString = connStr;

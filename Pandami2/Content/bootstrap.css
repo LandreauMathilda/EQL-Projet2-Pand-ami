@@ -5041,6 +5041,7 @@ a.badge:focus {
     margin-bottom: 30px;
     color: inherit;
     background-color: #fcf1be;
+    width : 78vw;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5537,12 +5538,14 @@ button.list-group-item-danger.active:focus {
 }
 .panel-body {
   padding: 15px;
+  width : 42vw;
 }
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  width : 42vw;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -5764,6 +5767,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default {
   border-color: #ddd;
+  width : 42.1vw;
 }
 .panel-default > .panel-heading {
   color: #333333;
@@ -6891,6 +6895,7 @@ button.close {
 }
 .row {
     background-color: #f9e68d;
+    width : 78vw;
 }
 .bodydem
 {
@@ -6948,10 +6953,14 @@ button.close {
 #blocprofil, #bodydem, #depotdem{
 
     margin : auto;
+ 
 }
 #tableprofil{
     margin : 1vw;
 }
+
+
+
 
 
 

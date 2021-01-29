@@ -103,9 +103,31 @@ namespace Pandami2.Controllers
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
             }
-            // TODO : idem pour autres demandes
+            List<DemandeService> demandesACloturerBeneficiaire = dao.GetDemandesACloturerBeneficiaire(ViewBag.idUtilisateur);
+            ViewBag.demandesACloturerBeneficiaire = demandesACloturerBeneficiaire;
+            foreach (DemandeService demande in ViewBag.demandesACloturerBeneficiaire)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
+            }
+            List<DemandeService> demandesACloturerBenevole = dao.GetDemandesACloturerBenevole(ViewBag.idUtilisateur);
+            ViewBag.demandesACloturerBenevole = demandesACloturerBenevole;
+            foreach (DemandeService demande in ViewBag.demandesACloturerBenevole)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
+            }
+            List<DemandeService> demandesAValiderParBeneficiaire = dao.GetDemandesAValiderParBeneficiaire(ViewBag.idUtilisateur);
+            ViewBag.demandesAValiderParBeneficiaire = demandesAValiderParBeneficiaire;
+            foreach (DemandeService demande in ViewBag.demandesAValiderParBeneficiaire)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
+
+            }
+           
             return View();
         }
 
