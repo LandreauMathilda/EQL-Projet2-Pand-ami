@@ -6859,15 +6859,17 @@ button.close {
 }
 #blocpresentation, #blocaccueil, #bodydepot{
     width : 78vw;
-    
-    
+
+}
+
+#pageaccueil{
+    margin : 0 10vw 0 10vw;
 }
 
 #blocgauche, #blocdroit {
     margin: auto;
-     width: 36.5vw;
+    width: 36.5vw;
     text-align: center;
-    
 }
 .demandes {
     border: 0.3vh solid black;
@@ -6880,7 +6882,7 @@ button.close {
     background-color: #f9eaa1;
 }
 
-#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours, #depotdem {
+#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours, #depotdem, #profil {
     margin: 1vh;
     padding: 1vh;
     flex-basis: 7vw;
@@ -6942,6 +6944,13 @@ button.close {
     background-color: #333;
     display: block;
     padding: 8px;
+}
+#blocprofil, #bodydem, #depotdem{
+
+    margin : auto;
+}
+#tableprofil{
+    margin : 1vw;
 }
 
 
