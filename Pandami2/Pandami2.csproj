@@ -207,11 +207,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Utilisateur\Profil.cshtml" />
-    <Content Include="Views\GestionDesDemandes\ListeDesDemandes.cshtml" />
     <Content Include="Views\GestionDesDemandes\SuiviDesDemandes.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Utilisateur\Inscription.cshtml" />
-    <Content Include="Views\GestionDesDemandes\Reponse.cshtml" />
     <Content Include="Views\GestionDesDemandes\RechercherUneDemande.cshtml" />
     <Content Include="Views\GestionDesDemandes\DeposerUneDemande.cshtml" />
   </ItemGroup>
