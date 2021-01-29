@@ -32,37 +32,47 @@
             <h3>Liste des demandes de service en cours</h3>
             @foreach (var item in ViewBag.listeDemandes)
             {
-                <form method="post" action="RechercherUneDemande">
-                    <input type="text" name="idUtilisateur" value="@ViewBag.utilisateur">
-                    <input type="text" name="idDemande" value="@item.IdDemande">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <label for="dateEnregistrement"> Date enregistrement </label>
-                            <input type="text" id="dateEnregistrement" value="@item.DateEnregistrement" />
-                            <label> Emetteur </label>
-                            <label id="idEmetteur" name="idEmetteur"> @item.IdEmetteur </label>
-                        </div>
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td> Type de service </td>
-                                    <td> @item.IdTypeService </td>
-                                <tr>
-                                    <td> Date de réalisation </td>
-                                    <td> @item.DateRealisation </td>
-                                </tr>
-                                <tr>
-                                    <td> Adresse de réalisation </td>
-                                    <td> @item.AdresseRealisation </td>
-                                <tr>
-                                    <td> Ville de réalisation </td>
-                                    <td> @item.VilleRealisation </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <input type="submit" value="Repondre" class="btn btn-default pull-right" />
-                    </div>
-                </form>
+        <form method="post" action="RechercherUneDemande">
+            <input type="text" name="idUtilisateur" value="@ViewBag.utilisateur" hidden>
+            <input type="text" name="idDemande" value="@item.IdDemande" hidden>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <table>
+                        <tr>
+                            <td>
+                                Date enregistrement : @item.DateEnregistrement.ToString("dd-MM-yyyy")
+                            </td>
+                            <td>
+                                Emetteur : @item.NomPrenomEmetteur
+                            </td>
+                        </tr>
+                    </table>
+
+                
+                 </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td> Type de service </td>
+                            <td> @item.LibelleTypeService </td>
+                        <tr>
+                            <td> Date de réalisation </td>
+                            <td> @item.DateRealisation </td>
+                        </tr>
+                        <tr>
+                            <td> Adresse de réalisation </td>
+                            <td> @item.AdresseRealisation </td>
+                        <tr>
+                            <td> Ville de réalisation </td>
+                            <td> @item.LibelleVilleRealisation </td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Repondre" class="btn btn-default pull-right" />
+                </div>
+
+            </div>
+        </form>
             }
         </div>
     </div>

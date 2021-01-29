@@ -18,8 +18,8 @@ namespace Pandami2.Controllers
 
         public ActionResult DeposerUneDemande()
         {
-            //ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
-            return View();
+            ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
+            return View(viewModelDemandeService);
         }
 
         [HttpPost]
