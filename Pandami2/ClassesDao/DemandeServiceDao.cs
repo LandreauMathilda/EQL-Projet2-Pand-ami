@@ -368,8 +368,21 @@ namespace Pandami2.ClassesDao
             cnx.Close();
         }
 
+        public void AnnulerDemande(int idDemande)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "UPDATE demande_service " +
+                              "SET date_annulation=SYSDATETIME() " +
+                              "WHERE id_demande = @idDemande";
+            cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
     }
-
-        
     }
 

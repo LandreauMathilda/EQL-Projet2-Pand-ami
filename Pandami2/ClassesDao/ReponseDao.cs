@@ -8,7 +8,8 @@ using System.Web;
 namespace Pandami2.ClassesDao
 {
     public class DaoReponse
-    {
+    {   
+        // classe qui comporte des méthodes pour insérer ou mettre à jour des données dans la table reponse
         private SqlConnection cnx;
 
         private void connection()
@@ -34,7 +35,7 @@ namespace Pandami2.ClassesDao
         // méthode qui permet de mettre à jour la date d'acceptation d'une réponse faite par un bénévole à une demande de service
         //@param : un idDemande => la demande à laquelle le bénévole a répondu
         //         un idBenevole => le bénévole qui a repondu à la demande de service
-        public void MaJDateAcceptation(int idDemande, int idBenevole)
+        public void MaJDateAcceptation(int idDemande, int? idBenevole)
         {
             connection();
             SqlCommand cmd = new SqlCommand();
@@ -48,5 +49,24 @@ namespace Pandami2.ClassesDao
             cnx.Close();
         }
 
+        //méthode qui permet de mettre à jour la date_annulation_participation dans la table reponse
+        //@param : un idDemande => la demande à laquelle le bénévole a répondu
+        //         un idBenevole => le bénévole qui a repondu à la demande de service
+        public void MajDateAnnulationParticipation(int idDemande, int? idBenevole)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "UPDATE reponse " +
+                              "SET date_annulation_participation = SYSDATETIME() " +
+                              "WHERE id_demande=@idDemande " +
+                              "AND id_utilisateur=@idBenevole";
+            cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+            cmd.Parameters.Add(new SqlParameter("@idBenevole", idBenevole));
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
     }
 }
