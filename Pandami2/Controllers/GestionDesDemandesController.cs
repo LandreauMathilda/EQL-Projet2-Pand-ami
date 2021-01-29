@@ -110,12 +110,16 @@ namespace Pandami2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SuiviDesDemandes(int idDemande, int? idBenevole)
+        public ActionResult SuiviDesDemandes(int idDemande, int? idBenevole, int? annulationParticipation)
         {
             DemandeServiceDao dao = new DemandeServiceDao();
             if (idBenevole == null)
             {
                 dao.AnnulerDemande(idDemande);
+            }
+            else if (annulationParticipation == 1) {
+                DaoReponse daoReponse = new DaoReponse();
+                daoReponse.MajDateAnnulationParticipation(idDemande, idBenevole);
             }
             else
             {

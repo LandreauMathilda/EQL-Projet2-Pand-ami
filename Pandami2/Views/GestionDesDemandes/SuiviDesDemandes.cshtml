@@ -77,43 +77,50 @@
         @foreach (DemandeService d in ViewBag.demandesEnCoursBenevole)
         {
             <div class="demandes">
-                <div>
-                    <label class="lbl1">Pour cette demande vous êtes : </label>
-                    <label class="lbl2">Bénévole</label>
-                </div>
-                <div>
-                    <label class="lbl1">Date de réalisation : </label>
-                    <label class="lbl2">@d.DateRealisation.ToString("dd-MM-yyyy")</label>
-                </div>
-                <div>
-                    <label class="lbl1">Heure de réalisation :</label>
-                    <label class="lbl2">@d.DateRealisation.ToString("HH:mm")</label>
-                </div>
-                <div>
-                    <label class="lbl1">Adresse de réalisation : </label>
-                    <label class="lbl2">@d.AdresseRealisation @d.CodePostal @d.LibelleVilleRealisation</label>
-                </div>
-                <div>
-                    <label class="lbl1">Type de service : </label>
-                    <label class="lbl2">@d.LibelleTypeService</label>
-                </div>
-                <div>
-                    <label class="lbl1">Equipement nécessaire : </label>
-                    <p id="equip">
-                        @foreach (string item in d.Equipements)
-                        {
+                <form method="post">
+                    <input type="text" name="idBenevole" value="@ViewBag.idUtilisateur" hidden />
+                    <input type="text" name="idDemande" value="@d.IdDemande" hidden />
+                    <div>
+                        <label class="lbl1">Pour cette demande vous êtes : </label>
+                        <label class="lbl2">Bénévole</label>
+                    </div>
+                    <div>
+                        <label class="lbl1">Date de réalisation : </label>
+                        <label class="lbl2">@d.DateRealisation.ToString("dd-MM-yyyy")</label>
+                    </div>
+                    <div>
+                        <label class="lbl1">Heure de réalisation :</label>
+                        <label class="lbl2">@d.DateRealisation.ToString("HH:mm")</label>
+                    </div>
+                    <div>
+                        <label class="lbl1">Adresse de réalisation : </label>
+                        <label class="lbl2">@d.AdresseRealisation @d.CodePostal @d.LibelleVilleRealisation</label>
+                    </div>
+                    <div>
+                        <label class="lbl1">Type de service : </label>
+                        <label class="lbl2">@d.LibelleTypeService</label>
+                    </div>
+                    <div>
+                        <label class="lbl1">Equipement nécessaire : </label>
+                        <p id="equip">
+                            @foreach (string item in d.Equipements)
+                            {
 
-                            <label id="equiplbl">@item</label><br />
+                                <label id="equiplbl">@item</label><br />
 
-                        }
-                    </p>
-                </div>
-                <div>
-                    <button class="btnsuividem">Annuler sa participation à cette demande</button>
-                </div>
-                <div>
-                    <button class="btnsuividem">Négocier la date et/ou l'heure de cette demande</button>
-                </div>
+                            }
+                        </p>
+                    </div>
+                    <div>
+                        <input type="button" class="btnsuividem" value="Négocier la date et/ou l'heure de cette demande" />
+                        <input type="radio" name="annulationParticipation" value="1" checked hidden />
+                        <input type="submit" class="btnsuividem" value="Annuler ma participation à cette demande" />
+                    </div>
+                    <div>
+                        
+                    </div>
+
+                </form>
             </div>
         }
 
