@@ -17,7 +17,7 @@
             <form class="form-inline" action="" method="post">
                 <div class="input-group">
                     <select class="form-control">
-                        <option selected>Recherche par type de service</option>
+                        <option selected>Recherche par type de service : </option>
                         @foreach (var data in ViewBag.listeTypeService)
                         {
                             <option value="1">@data</option>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-sm-9">
-            <h3>Liste des demandes de service en cours</h3>
+            <h3>Liste des demandes de service en cours : </h3>
             @foreach (var item in ViewBag.listeDemandes)
             {
                 <form methode="post">
@@ -40,10 +40,10 @@
                             <table>
                                 <tr>
                                     <td>
-                                        Date enregistrement : @item.DateEnregistrement.ToString("dd-MM-yyyy")
+                                        Date de publication : @item.DateEnregistrement.ToString("dd-MM-yyyy")
                                     </td>
                                     <td>
-                                        Emetteur : @item.NomPrenomEmetteur
+                                        Bénéficiaire émetteur  : @item.NomPrenomEmetteur
                                     </td>
                                 </tr>
 
@@ -52,17 +52,17 @@
                         <div class="panel-body">
                             <table>
                                 <tr>
-                                    <td> Type de service </td>
+                                    <td> Type de service : </td>
                                     <td> @item.LibelleTypeService </td>
                                 <tr>
-                                    <td> Date de réalisation </td>
+                                    <td> Date de réalisation : </td>
                                     <td> @item.DateRealisation </td>
                                 </tr>
                                 <tr>
-                                    <td> Adresse de réalisation </td>
+                                    <td> Adresse de réalisation : </td>
                                     <td> @item.AdresseRealisation </td>
                                 <tr>
-                                    <td> Ville de réalisation </td>
+                                    <td> Ville de réalisation : </td>
                                     <td> @item.LibelleVilleRealisation </td>
                                 </tr>
                             </table>

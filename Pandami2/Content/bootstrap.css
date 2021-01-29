@@ -4,6 +4,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+#bodyaccueil {
+    align-content : center;
+}
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1592,7 +1595,7 @@ pre code {
   }
 }
 @media (min-width: 992px) {
-  .container {
+  .container{
     width: 970px;
   }
 }
@@ -6840,8 +6843,7 @@ button.close {
 }
 #blocpresentation {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+   margin : 1vh auto 1vh auto;
     text-align: center;
     height : 60vh;
 }
@@ -6849,12 +6851,15 @@ button.close {
 #blocaccueil {
 
     padding: 0.5vw;
-    margin: auto;
+   margin : auto;
     background-color: #f9e68d;
  align-items : center;
+
+
 }
 #blocpresentation, #blocaccueil, #bodydepot{
     width : 78vw;
+    
     
 }
 
@@ -6866,9 +6871,7 @@ button.close {
 }
 .demandes {
     border: 0.3vh solid black;
-    margin-right: 3vw;
-    margin-bottom: 1vw;
-    margin-left: 10vw;
+    margin : 1vh auto 1vh auto;
     padding: 0.5vh;
     border-radius: 5px;
     width: 50vw;
@@ -6895,7 +6898,7 @@ button.close {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: stretch;
-    width: 75vw;
+    width: 80vw;
 }
 
 
@@ -6930,6 +6933,15 @@ button.close {
 .suividem,
 .bodydepo {
     background-color: #fbf9ec;
+    align-content : center;
+}
+#navbarsuivi {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #333;
+    display: block;
+    padding: 8px;
 }
 
 

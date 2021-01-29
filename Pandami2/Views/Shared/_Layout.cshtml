@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body >
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -34,16 +34,16 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-
-                    <li>@Html.ActionLink("Se Connecter", "Login", "Login")</li>
-                    <li>@Html.ActionLink("S'inscrire", "Inscription", "Utilisateur")</li>
+                    @*<li> @Html.ActionLink("Déconnexion") </li>*@
+                    @*<li>@Html.ActionLink("Se Connecter", "Login", "Login")</li>*@
+                    @*<li>@Html.ActionLink("S'inscrire", "Inscription", "Utilisateur")</li>*@
 
 
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" id="bodyaccueil">
         @RenderBody()
         <hr />
         <footer>
