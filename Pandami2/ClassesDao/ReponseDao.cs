@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace Pandami2.Models
+namespace Pandami2.ClassesDao
 {
     public class DaoReponse
     {
@@ -23,30 +23,30 @@ namespace Pandami2.Models
             cmd.Connection = cnx;
             cmd.CommandText = "Insert into reponse (date_reponse,id_utilisateur,id_demande)  values (@date_reponse,@id_utilisateur,@id_demande)";
             cmd.CommandType = System.Data.CommandType.Text;
-
             cmd.Parameters.Add(new SqlParameter("@date_reponse", DateTime.Now));
             cmd.Parameters.Add(new SqlParameter("@id_utilisateur", idUtilisateur));
             cmd.Parameters.Add(new SqlParameter("@id_demande", idDemande));
-            //Reponse reponse = new Reponse(idUtilisateur, idDemande, DateTime.Now);
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
-            //return reponse;
-           
-
-            
         }
 
-
-
-        
-
-
-
-
-
-
-
+        // méthode qui permet de mettre à jour la date d'acceptation d'une réponse faite par un bénévole à une demande de service
+        //@param : un idDemande => la demande à laquelle le bénévole a répondu
+        //         un idBenevole => le bénévole qui a repondu à la demande de service
+        public void MaJDateAcceptation(int idDemande, int idBenevole)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.UpdateDateAcceptation_TableReponse";
+            cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+            cmd.Parameters.Add(new SqlParameter("@idBenevole", idBenevole));
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
 
     }
 }
