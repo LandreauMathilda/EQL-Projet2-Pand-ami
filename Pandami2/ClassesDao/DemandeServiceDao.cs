@@ -201,6 +201,38 @@ namespace Pandami2.ClassesDao
             cnx.Close();
             return listeDemandes;
         }
+        public List<DemandeService> GetDemandesEnAttenteAValider(int idUtilisateur)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            cnx.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetDemandesEnAttente";
+            SqlParameter idUtilisateurPara = new SqlParameter("@IdUtilisateur", idUtilisateur);
+            cmd.Parameters.Add(idUtilisateurPara);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<DemandeService> listeDemandes = new List<DemandeService>();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    DemandeService demande = new DemandeService((DateTime)dr["date_realisation"],
+                                                                (string)dr["adresse_realisation"],
+                                                                (string)dr["code_postal"],
+                                                                (string)dr["libelle_ville"],
+                                                                (string)dr["libelle_type_service"],
+                                                                (string)dr["nom"] + " " + dr["prenom"],
+                                                                (int)dr["id_demande"],
+                                                                (int)dr["id_utilisateur"]);
+
+                    listeDemandes.Add(demande);
+                }
+            }
+            cnx.Close();
+            return listeDemandes;
+        }
 
         public void RechercherParType(int type)
         {

@@ -28,6 +28,7 @@ namespace Pandami2.Models
         private List<string> equipements;
         private string nomBenevole;
         private string codePostal;
+        private int idBenevole;
 
 
         string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
@@ -49,6 +50,7 @@ namespace Pandami2.Models
         public string NomBenevole { get => nomBenevole; set => nomBenevole = value; }
         public string CodePostal { get => codePostal; set => codePostal = value; }
         public List<string> Equipements { get => equipements; set => equipements = value; }
+        public int IdBenevole { get => idBenevole; set => idBenevole = value; }
 
         public DemandeService(int idUtilisateur)
         {
@@ -111,6 +113,17 @@ namespace Pandami2.Models
             this.libelleVilleRealisation = libelleVilleRealisation;
             this.libelleTypeService = libelleTypeService;
             this.idDemande = idDemande;
+        }
+        public DemandeService(DateTime dateRealisation, string adresseRealisation, string codePostal, string libelleVilleRealisation, string libelleTypeService, string nomBenevole, int idDemande, int idBenevole)
+        {
+            this.dateRealisation = dateRealisation;
+            this.adresseRealisation = adresseRealisation;
+            this.codePostal = codePostal;
+            this.libelleVilleRealisation = libelleVilleRealisation;
+            this.libelleTypeService = libelleTypeService;
+            this.nomBenevole = nomBenevole;
+            this.idDemande = idDemande;
+            this.idBenevole = idBenevole;
         }
     }
 

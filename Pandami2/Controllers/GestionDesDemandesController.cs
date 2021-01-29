@@ -95,6 +95,14 @@ namespace Pandami2.Controllers
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
             }
+            List<DemandeService> demandesEnAttenteAValider = dao.GetDemandesEnAttenteAValider(ViewBag.idUtilisateur);
+            ViewBag.demandesEnAttenteAValider = demandesEnAttenteAValider;
+            foreach (DemandeService demande in ViewBag.demandesEnAttenteAValider)
+            {
+                EquipementDao eqdao = new EquipementDao();
+                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
+
+            }
             // TODO : idem pour autres demandes
 
 

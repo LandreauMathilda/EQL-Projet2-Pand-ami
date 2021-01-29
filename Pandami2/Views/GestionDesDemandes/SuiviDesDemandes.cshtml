@@ -168,48 +168,58 @@
     </div>
     <div class="suividem" id="demavalider">
         <h3 class="titredem">Demandes à valider</h3>
-        <div class="demandes">
-            <div>
-                <label class="lbl1">Pour cette demande vous êtes : </label>
-                <label class="lbl2">Bénéficiaire</label>
-            </div>
-            <div>
-                <label class="lbl1">Date de réalisation :</label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <label class="lbl1">Heure de réalisation :</label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <label class="lbl1">Adresse de réalisation : </label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <label class="lbl1">Type de service : </label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <label class="lbl1">Equipement nécessaire : </label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <label class="lbl1">Bénévole concerné par cette demande : </label>
-                <label class="lbl2"></label>
-            </div>
-            <div>
-                <button class="btnsuividem">Accepter ce bénévole</button>
-            </div>
-            <div>
-                <button class="btnsuividem">Modifier cette demande</button>
-            </div>
-            <div>
-                <button class="btnsuividem">Suspendre cette demande</button>
-            </div>
-            <div>
-                <button class="btnsuividem">Annuler cette demande</button>
-            </div>
+        @foreach (DemandeService d in ViewBag.demandesEnAttenteAValider)
+        {
+    <div class="demandes">
+        <div>
+            <label class="lbl1">Pour cette demande vous êtes : </label>
+            <label class="lbl2">Bénéficiaire</label>
         </div>
+        <div>
+            <label class="lbl1">Date de réalisation : </label>
+            <label class="lbl2">@d.DateRealisation.ToString("dd-MM-yyyy")</label>
+        </div>
+        <div>
+            <label class="lbl1">Heure de réalisation :</label>
+            <label class="lbl2">@d.DateRealisation.ToString("HH:mm")</label>
+        </div>
+        <div>
+            <label class="lbl1">Adresse de réalisation : </label>
+            <label class="lbl2">@d.AdresseRealisation @d.CodePostal @d.LibelleVilleRealisation</label>
+        </div>
+        <div>
+            <label class="lbl1">Type de service : </label>
+            <label class="lbl2">@d.LibelleTypeService</label>
+        </div>
+        <div>
+            <label class="lbl1">Equipement nécessaire : </label>
+            <p id="equip">
+                @foreach (string item in d.Equipements)
+                {
+
+                    <label id="equiplbl">@item</label><br />
+
+                }
+            </p>
+        </div>
+        <div>
+            <label class="lbl1">Bénévole concerné par cette demande : </label>
+            <label class="lbl2">@d.NomBenevole</label>
+        </div>
+        <div>
+            <button class="btnsuividem">Accepter ce bénévole</button>
+        </div>
+        <div>
+            <button class="btnsuividem">Modifier cette demande</button>
+        </div>
+        <div>
+            <button class="btnsuividem">Suspendre cette demande</button>
+        </div>
+        <div>
+            <button class="btnsuividem">Annuler cette demande</button>
+        </div>
+    </div>
+        }
     </div>
     <div class="suividem" id="demenattente">
         <h3 class="titredem">Demandes en attente de validation du bénéficiaire</h3>
