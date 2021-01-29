@@ -34,7 +34,7 @@ namespace Pandami2.ClassesDao
         // méthode qui permet de mettre à jour la date d'acceptation d'une réponse faite par un bénévole à une demande de service
         //@param : un idDemande => la demande à laquelle le bénévole a répondu
         //         un idBenevole => le bénévole qui a repondu à la demande de service
-        public void MaJDateAcceptation(int idDemande, int idBenevole)
+        public void MaJDateAcceptation(int idDemande, int? idBenevole)
         {
             connection();
             SqlCommand cmd = new SqlCommand();

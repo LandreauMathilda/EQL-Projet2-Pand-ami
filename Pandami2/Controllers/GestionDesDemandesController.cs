@@ -41,7 +41,7 @@ namespace Pandami2.Controllers
             return View(viewModelDemandeService);
         }
 
-       
+
 
         public ActionResult RechercherUneDemande()
         {
@@ -58,11 +58,11 @@ namespace Pandami2.Controllers
         {
 
             DaoReponse rbd = new DaoReponse();
-            rbd.AjoutReponse(idUtilisateur,idDemande);
-            
-            return  RedirectToAction ("RechercherUneDemande");
+            rbd.AjoutReponse(idUtilisateur, idDemande);
+
+            return RedirectToAction("RechercherUneDemande");
         }
-        
+
 
 
         public ActionResult SuiviDesDemandes()
@@ -110,12 +110,19 @@ namespace Pandami2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SuiviDesDemandes(int idDemande, int idBenevole)
+        public ActionResult SuiviDesDemandes(int idDemande, int? idBenevole)
         {
-            DaoReponse daoReponse = new DaoReponse();
-            daoReponse.MaJDateAcceptation(idDemande, idBenevole);
-
             DemandeServiceDao dao = new DemandeServiceDao();
+            if (idBenevole == null)
+            {
+                dao.AnnulerDemande(idDemande);
+            }
+            else
+            {
+                DaoReponse daoReponse = new DaoReponse();
+                daoReponse.MaJDateAcceptation(idDemande, idBenevole);
+            }
+
             ViewBag.idUtilisateur = 1;
             // liste des demandes en cours
             List<DemandeService> demandesEnCoursBeneficiaire = dao.GetDemandesEnCoursBeneficiaire(ViewBag.idUtilisateur);
@@ -156,8 +163,5 @@ namespace Pandami2.Controllers
             return View();
 
         }
-
-
-
     }
 }
