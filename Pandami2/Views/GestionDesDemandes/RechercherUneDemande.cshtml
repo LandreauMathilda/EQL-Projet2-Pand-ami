@@ -40,10 +40,12 @@
                 <div class="panel-heading">
                     <table>
                         <tr>
-                            <td>
+                            <td class="lbl1">
                                 Date enregistrement : @item.DateEnregistrement.ToString("dd-MM-yyyy")
                             </td>
-                            <td>
+                            </tr>
+                            <tr>
+                            <td class="lbl1"> 
                                 Emetteur : @item.NomPrenomEmetteur
                             </td>
                         </tr>
@@ -54,21 +56,21 @@
                 <div class="panel-body">
                     <table>
                         <tr>
-                            <td> Type de service </td>
-                            <td> @item.LibelleTypeService </td>
+                            <td class="lbl1"> Type de service :</td>
+                            <td class="lbl2"> @item.LibelleTypeService </td>
                         <tr>
-                            <td> Date de réalisation </td>
-                            <td> @item.DateRealisation </td>
+                            <td class="lbl1"> Date de réalisation :</td>
+                            <td class="lbl2"> @item.DateRealisation </td>
                         </tr>
                         <tr>
-                            <td> Adresse de réalisation </td>
-                            <td> @item.AdresseRealisation </td>
+                            <td class="lbl1"> Adresse de réalisation :</td>
+                            <td class="lbl2"> @item.AdresseRealisation </td>
                         <tr>
-                            <td> Ville de réalisation </td>
-                            <td> @item.LibelleVilleRealisation </td>
+                            <td class="lbl1"> Ville de réalisation :</td>
+                            <td class="lbl2"> @item.LibelleVilleRealisation </td>
                         </tr>
                     </table>
-                    <input type="submit" value="Repondre" class="btn btn-default pull-right" />
+                    <input type="submit" value="Répondre" class="btn btn-default pull-right" />
                 </div>
 
             </div>
