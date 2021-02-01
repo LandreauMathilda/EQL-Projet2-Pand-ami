@@ -147,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ClassesDao\EquipementDao.cs" />
+    <Compile Include="ClassesDao\GenreDAO.cs" />
     <Compile Include="ClassesDao\TypeServiceDao.cs" />
     <Compile Include="ClassesDao\VilleDao.cs" />
     <Compile Include="ClassesDao\DemandeServiceDao.cs" />
@@ -158,11 +159,13 @@
     </Compile>
     <Compile Include="ClassesDao\ReponseDao.cs" />
     <Compile Include="ClassesDao\UtilisateurDao.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Reponse.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Equipement.cs" />
     <Compile Include="Models\TypeService.cs" />
     <Compile Include="Models\ViewModelDemandeService.cs" />
+    <Compile Include="Models\ViewModelUtilisateur.cs" />
     <Compile Include="Models\Ville.cs" />
     <Compile Include="Models\DemandeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

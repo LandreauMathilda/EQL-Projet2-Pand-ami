@@ -19,7 +19,7 @@ namespace Pandami2.Controllers
         {
             return View();
         }
-        /*public ActionResult Inscription()
+        public ActionResult Inscription()
         {
             Utilisateur utilisateur = new Utilisateur();
             VilleDao villeDao = new VilleDao();
@@ -27,7 +27,7 @@ namespace Pandami2.Controllers
 
            ViewModelUtilisateur u = new ViewModelUtilisateur(utilisateur,villeDao,genreDao);
             return View(u);
-        }*/
+        }
         [HttpPost]
         public ActionResult Inscription(Utilisateur utilisateur)
         {
