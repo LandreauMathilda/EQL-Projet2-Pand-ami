@@ -77,6 +77,7 @@ namespace Pandami2.ClassesDao
                               "FROM demande_service ds INNER JOIN utilisateur ut on ds.id_emetteur=ut.id_utilisateur " +
                                                       "INNER JOIN ville vi ON ds.id_ville=vi.id_ville " +
                                                       "INNER JOIN type_service ts ON ds.id_type_service=ts.id_type_service;";
+
             cmd.CommandType = System.Data.CommandType.Text;
             SqlDataReader dr = cmd.ExecuteReader();
             List<DemandeService> listeDemandes = new List<DemandeService>();
@@ -383,6 +384,49 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
+
+        
+       
+            public void CloturerUneDemandeFinalisee(int idDemande)
+            {
+                SqlConnection cnx = new SqlConnection();
+                cnx.ConnectionString = connStr;
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnx;
+
+                cmd.CommandText = "dbo.CloturerUneDemandeFinalisee";
+
+
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+
+                cnx.Open();
+            cmd.ExecuteNonQuery();
+                cnx.Close();
+
+            }
+            public void CloturerUneDemandeNonFinalisee(int idDemande)
+            {
+                SqlConnection cnx = new SqlConnection();
+                cnx.ConnectionString = connStr;
+               
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cnx;
+
+                cmd.CommandText = "dbo.cloturerUneDemandeNonFinalisee";
+
+
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+
+
+                cnx.Open();
+                cmd.ExecuteNonQuery();
+                cnx.Close();
+
+            }
+        }
     }
-    }
+    
 

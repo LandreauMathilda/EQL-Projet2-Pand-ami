@@ -134,6 +134,7 @@ namespace Pandami2.Controllers
         [HttpPost]
         public ActionResult SuiviDesDemandes(int idDemande, int? idBenevole, int? annulationParticipation)
         {
+            ViewBag.idUtilisateur = 1;
             DemandeServiceDao dao = new DemandeServiceDao();
             if (idBenevole == null)
             {
@@ -149,44 +150,22 @@ namespace Pandami2.Controllers
                 daoReponse.MaJDateAcceptation(idDemande, idBenevole);
             }
 
-            ViewBag.idUtilisateur = 1;
-            // liste des demandes en cours
-            List<DemandeService> demandesEnCoursBeneficiaire = dao.GetDemandesEnCoursBeneficiaire(ViewBag.idUtilisateur);
-            ViewBag.demandesEnCours = demandesEnCoursBeneficiaire;
-            foreach (DemandeService demande in ViewBag.demandesEnCours)
+            if (Request.Form["clotureEffectuee"] != null)
             {
-                EquipementDao eqdao = new EquipementDao();
-                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
+                dao.CloturerUneDemandeFinalisee(idDemande);
             }
-            List<DemandeService> demandesEnCoursBenevole = dao.GetDemandesEnCoursBenevole(ViewBag.idUtilisateur);
-            ViewBag.demandesEnCoursBenevole = demandesEnCoursBenevole;
-            foreach (DemandeService demande in ViewBag.demandesEnCoursBenevole)
+            else if (Request.Form["clotureNonEffectuee"] != null)
             {
-                EquipementDao eqdao = new EquipementDao();
-                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
 
+                dao.CloturerUneDemandeNonFinalisee(idDemande);
             }
-            List<DemandeService> demandesNonPourvues = dao.GetDemandesNonPourvues(ViewBag.idUtilisateur);
-            ViewBag.demandesNonPourvues = demandesNonPourvues;
-            foreach (DemandeService demande in ViewBag.demandesNonPourvues)
-            {
-                EquipementDao eqdao = new EquipementDao();
-                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
-            }
-            List<DemandeService> demandesEnAttenteAValider = dao.GetDemandesEnAttenteAValider(ViewBag.idUtilisateur);
-            ViewBag.demandesEnAttenteAValider = demandesEnAttenteAValider;
-            foreach (DemandeService demande in ViewBag.demandesEnAttenteAValider)
-            {
-                EquipementDao eqdao = new EquipementDao();
-                demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
-            }
-            // TODO : idem pour autres demandes
 
 
-            return View();
+
+
+
+            return RedirectToAction("SuiviDesDemandes");
 
         }
     }

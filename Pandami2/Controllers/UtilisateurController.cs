@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Pandami2.ClassesDao;
 using Pandami2.Models;
 
 
@@ -23,7 +24,11 @@ namespace Pandami2.Controllers
        
         public ActionResult Inscription()
         {
-            Utilisateur u = new Utilisateur();
+            Utilisateur utilisateur = new Utilisateur();
+            VilleDao villeDao = new VilleDao();
+            GenreDAO genreDao = new GenreDAO();
+
+           ViewModelUtilisateur u = new ViewModelUtilisateur(utilisateur,villeDao,genreDao);
             return View(u);
         }
 
@@ -34,7 +39,7 @@ namespace Pandami2.Controllers
 
             DaoUtilisateur ubd = new DaoUtilisateur();
             ubd.AjoutUtilisateur(utilisateur);
-               
+            ViewBag.Message = "==========Votre Inscription s'est bien déroulée =============";
             return RedirectToAction("Inscription");
            
         }

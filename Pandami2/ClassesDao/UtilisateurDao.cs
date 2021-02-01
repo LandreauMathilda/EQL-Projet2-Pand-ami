@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using Pandami2.ClassesDao;
+using Pandami2.Models;
 
 namespace Pandami2.Models
 {
@@ -24,7 +26,7 @@ namespace Pandami2.Models
             connection();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "Insert into utilisateur (nom,prenom,id_genre,date_naissance,adresse,id_ville,num_telephone,email,date_inscription) values(@nom,@prenom,@id_genre,@date_naissance,@adresse,@id_ville,@num_telephone,@email,@date_inscription)";
+            cmd.CommandText = "Insert into utilisateur (nom,prenom,id_genre,date_naissance,adresse,Id_ville,num_telephone,email,date_inscription) values(@nom,@prenom,@Id_genre,@date_naissance,@adresse,@Id_ville,@num_telephone,@email,@date_inscription)";
             cmd.CommandType = System.Data.CommandType.Text;           
             
             cmd.Parameters.Add(new SqlParameter("@nom", utilisateur.Nom));
@@ -33,7 +35,7 @@ namespace Pandami2.Models
             cmd.Parameters.Add(new SqlParameter("@prenom", utilisateur.Prenom));
 
             
-            cmd.Parameters.Add( new SqlParameter("@id_genre", utilisateur.Id_genre));
+            cmd.Parameters.Add( new SqlParameter("@Id_genre", utilisateur.Id_genre));
 
             
             cmd.Parameters.Add(new SqlParameter("@date_naissance", utilisateur.Date_naissance));
@@ -42,7 +44,7 @@ namespace Pandami2.Models
             cmd.Parameters.Add(new SqlParameter("@adresse", utilisateur.Adresse));
 
            
-            cmd.Parameters.Add(new SqlParameter("@id_ville", utilisateur.Id_ville));
+            cmd.Parameters.Add(new SqlParameter("@Id_ville", utilisateur.Id_ville));
 
             
             cmd.Parameters.Add(new SqlParameter("@num_telephone", utilisateur.Num_telephone));
@@ -51,11 +53,11 @@ namespace Pandami2.Models
             cmd.Parameters.Add(new SqlParameter("@email", utilisateur.Email));
 
             
-            cmd.Parameters.Add(new SqlParameter("@date_inscription", utilisateur.Date_inscription));
+            cmd.Parameters.Add(new SqlParameter("@date_inscription", DateTime.Now));
             cnx.Open();
             cmd.ExecuteNonQuery();
-            cnx.Close();   
-            
+            cnx.Close();
+
         }
 
 
@@ -97,5 +99,7 @@ namespace Pandami2.Models
             
 
         }
+       
+       
     }
 }

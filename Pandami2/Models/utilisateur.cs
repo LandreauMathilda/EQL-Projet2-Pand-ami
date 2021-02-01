@@ -28,21 +28,21 @@ namespace Pandami2.Models
 
         [Display (Name ="Id_utilisateur")]
         public int Id_utilisateur { get => id_utilisateur; set => id_utilisateur = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+      
         public string Nom { get => nom; set => nom = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+       
         public string Prenom { get => prenom; set => prenom = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+      
         public DateTime Date_naissance { get => date_naissance; set => date_naissance = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+     
         public string Adresse { get => adresse; set => adresse = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+   
         public int Id_ville { get => id_ville; set => id_ville = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+       
         public int Num_telephone { get => num_telephone; set => num_telephone = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+        
         public string Email { get => email; set => email = value; }
-        [Required(ErrorMessage = "Ce champ est opbligatoire")]
+        
         public DateTime Date_inscription { get => date_inscription; set => date_inscription = value; }
         public DateTime Date_desinscription { get => date_desinscription; set => date_desinscription = value; }
         
