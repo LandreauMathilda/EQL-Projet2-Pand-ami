@@ -8,11 +8,9 @@
 <div class="jumbotron text-center " >
     <h2>Rechercher une demande de service </h2>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
-
             <br />
             <form class="form-inline" action="" method="post">
                 <div class="input-group">
@@ -27,7 +25,6 @@
                 </div>
             </form>
         </div>
-
         <div class="col-sm-9" id="listedemande">
             <h3>Liste des demandes de service en cours</h3>
             @foreach (var item in ViewBag.listeDemandes)
@@ -35,7 +32,6 @@
         <form method="post" action="RechercherUneDemande">
             <input type="text" name="idUtilisateur" value="@ViewBag.utilisateur" hidden>
             <input type="text" name="idDemande" value="@item.IdDemande" hidden>
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <table>
@@ -50,8 +46,6 @@
                             </td>
                         </tr>
                     </table>
-
-                
                  </div>
                 <div class="panel-body">
                     <table>
@@ -72,7 +66,6 @@
                     </table>
                     <input type="submit" value="Répondre" class="btn btn-default pull-right" />
                 </div>
-
             </div>
         </form>
             }

@@ -11,7 +11,6 @@ namespace Pandami2.Controllers
 {
     public class UtilisateurController : Controller
     {
-       
         public ActionResult Index()
         {
             return View();
@@ -20,9 +19,7 @@ namespace Pandami2.Controllers
         {
             return View();
         }
-        
-       
-        public ActionResult Inscription()
+        /*public ActionResult Inscription()
         {
             Utilisateur utilisateur = new Utilisateur();
             VilleDao villeDao = new VilleDao();
@@ -30,24 +27,14 @@ namespace Pandami2.Controllers
 
            ViewModelUtilisateur u = new ViewModelUtilisateur(utilisateur,villeDao,genreDao);
             return View(u);
-        }
-
+        }*/
         [HttpPost]
         public ActionResult Inscription(Utilisateur utilisateur)
-        
         {
-
             DaoUtilisateur ubd = new DaoUtilisateur();
             ubd.AjoutUtilisateur(utilisateur);
             ViewBag.Message = "==========Votre Inscription s'est bien déroulée =============";
             return RedirectToAction("Inscription");
-           
         }
-            
-
-
-       
-
-
     }
 }

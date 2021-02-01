@@ -15,13 +15,11 @@ namespace Pandami2.Controllers
         {
             return View();
         }
-
         public ActionResult DeposerUneDemande()
         {
             ViewModelDemandeService viewModelDemandeService = new ViewModelDemandeService(1);
             return View(viewModelDemandeService);
         }
-
         [HttpPost]
         public ActionResult DeposerUneDemande(int idEmetteur, DateTime dateEnregistrement, DateTime dateRealisation, DateTime heureRealisation,
         string adresseRealisation, int? idVille, int idTypeService, int? idEquipement, DateTime? dateAnnulation, DateTime? dateCloture,
@@ -40,9 +38,6 @@ namespace Pandami2.Controllers
             ViewBag.Message = "Votre demande a bien été enregistrée!";
             return View(viewModelDemandeService);
         }
-
-
-
         public ActionResult RechercherUneDemande()
         {
             DemandeServiceDao demandeServiceDao = new DemandeServiceDao();
@@ -52,23 +47,16 @@ namespace Pandami2.Controllers
             ViewBag.listeTypeService = typeServiceDao.ChargerListeTypeService();
             return View();
         }
-
         [HttpPost]
         public ActionResult RechercherUneDemande(int idUtilisateur, int idDemande)
         {
-
             DaoReponse rbd = new DaoReponse();
             rbd.AjoutReponse(idUtilisateur, idDemande);
-
             return RedirectToAction("RechercherUneDemande");
         }
-
-
-
         public ActionResult SuiviDesDemandes()
         {
             DemandeServiceDao dao = new DemandeServiceDao();
-
             ViewBag.idUtilisateur = 1;
             // liste des demandes en cours
             List<DemandeService> demandesEnCoursBeneficiaire = dao.GetDemandesEnCoursBeneficiaire(ViewBag.idUtilisateur);
@@ -77,7 +65,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesEnCoursBenevole = dao.GetDemandesEnCoursBenevole(ViewBag.idUtilisateur);
             ViewBag.demandesEnCoursBenevole = demandesEnCoursBenevole;
@@ -85,7 +72,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesNonPourvues = dao.GetDemandesNonPourvues(ViewBag.idUtilisateur);
             ViewBag.demandesNonPourvues = demandesNonPourvues;
@@ -93,7 +79,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesEnAttenteAValider = dao.GetDemandesEnAttenteAValider(ViewBag.idUtilisateur);
             ViewBag.demandesEnAttenteAValider = demandesEnAttenteAValider;
@@ -101,7 +86,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesACloturerBeneficiaire = dao.GetDemandesACloturerBeneficiaire(ViewBag.idUtilisateur);
             ViewBag.demandesACloturerBeneficiaire = demandesACloturerBeneficiaire;
@@ -109,7 +93,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesACloturerBenevole = dao.GetDemandesACloturerBenevole(ViewBag.idUtilisateur);
             ViewBag.demandesACloturerBenevole = demandesACloturerBenevole;
@@ -117,7 +100,6 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
             List<DemandeService> demandesAValiderParBeneficiaire = dao.GetDemandesAValiderParBeneficiaire(ViewBag.idUtilisateur);
             ViewBag.demandesAValiderParBeneficiaire = demandesAValiderParBeneficiaire;
@@ -125,9 +107,7 @@ namespace Pandami2.Controllers
             {
                 EquipementDao eqdao = new EquipementDao();
                 demande.Equipements = eqdao.RecupererListeEquipement(demande.IdDemande);
-
             }
-           
             return View();
         }
 

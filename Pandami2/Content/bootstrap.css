@@ -6840,7 +6840,7 @@ button.close {
   }
 }
 #imgpandami{
-    height : 30vh;
+    width : 10vw;
     display : block;
     margin-left : auto;
     margin-right : auto;
@@ -6851,22 +6851,15 @@ button.close {
     text-align: center;
     height : 60vh;
 }
-
 #blocaccueil {
-
     padding: 0.5vw;
    margin : auto;
     background-color: #f9e68d;
  align-items : center;
-
-
 }
 #blocpresentation, #bodydepot{
     width : 78vw;
-
 }
-
-
 #blocgauche, #blocdroit {
     margin: auto;
     width: 36.5vw;
@@ -6882,7 +6875,6 @@ button.close {
     height: auto;
     background-color: #f9eaa1;
 }
-
 #demenattente, #demavalider, #demnonpourv, #dempassees, #demcours, #depotdem, #profil {
     margin: 1vh;
     padding: 1vh;
@@ -6903,27 +6895,22 @@ button.close {
     width: 80vw;
     margin-left : 20vw;
 }
-
 .titredem {
     text-align: center;
     font-size: 3vh;
 }
-
 .btnsuividem {
     padding: 0.5vh;
     margin: 0.5vh;
     font-size: 1.75vh;
     float: right;
 }
-
 .lbl1 {
     font-size: 1.75vh;
 }
-
 .lbl2 {
     font-size: 1.7vh;
     float: right;
-    
 }
 #equip {
     float: right;
@@ -6937,7 +6924,6 @@ button.close {
     background-color: #fbf9ec;
     align-content : center;
 }
-
 #blocprofil, #bodydem, #depotdem{
     margin : auto;
 }
@@ -6959,12 +6945,10 @@ button.close {
     list-style-type: none;
     width: 78vw;
 }
-
 #lisuivi {
     margin-left: 2px;
     float: left; 
 }
-
 #asuivi {
     display: block;
     width: inherit;

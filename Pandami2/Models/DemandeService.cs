@@ -30,7 +30,6 @@ namespace Pandami2.Models
         private string codePostal;
         private int idBenevole;
 
-
         string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
         public int IdDemande { get => idDemande; set => idDemande = value; }
         public int IdEmetteur { get => idEmetteur; set => idEmetteur = value; }
@@ -56,9 +55,6 @@ namespace Pandami2.Models
         {
             this.idEmetteur = idUtilisateur;
         }
-
-
-        // constructeur chargé demande de service :
         public DemandeService(DateTime dateEnregistrement, DateTime dateRealisation, string adresseRealisation, int villeRealisation, DateTime heureRealisation, int idEmetteur = default, int idTypeService = default)
         {
             this.dateEnregistrement = dateEnregistrement;
@@ -68,14 +64,10 @@ namespace Pandami2.Models
             this.heureRealisation = heureRealisation;
             this.idTypeService = idTypeService;// == type de service 
             this.idEmetteur = idEmetteur;//  ==utilisateur qui a créé la demande
-
         }
-
-        //Constructeur vide
         public DemandeService()
         {
         }
-
         public DemandeService(int idDemande, int idEmetteur, DateTime dateEnregistrement, DateTime dateRealisation, string adresseRealisation, int villeRealisation,
             DateTime heureRealisation, int idTypeService, DateTime dateAnnulation, DateTime dateCloture, DateTime dateNonFinalisation, int idMotifAnnulation
             )
@@ -92,9 +84,7 @@ namespace Pandami2.Models
             this.dateCloture = dateCloture;
             this.dateNonFinalisation = dateNonFinalisation;
             this.idMotifAnnulation = idMotifAnnulation;
-
         }
-
         public DemandeService (DateTime dateRealisation, string adresseRealisation, string codePostal, string libelleVilleRealisation, string libelleTypeService, string nomBenevole, int idDemande)
         {
             this.dateRealisation = dateRealisation;
@@ -126,7 +116,4 @@ namespace Pandami2.Models
             this.idBenevole = idBenevole;
         }
     }
-
-
-    
 }

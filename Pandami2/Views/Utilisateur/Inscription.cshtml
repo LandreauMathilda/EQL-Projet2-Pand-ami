@@ -1,7 +1,7 @@
 ﻿
 
 @model Pandami2.Models.ViewModelUtilisateur
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   
 @{
     ViewBag.Title = "Inscription";
 
@@ -9,27 +9,17 @@
 <div class="jumbotron text-center">
     <h2>Inscription</h2>
 </div>
-
 <h2> Formulaire d'inscription</h2>
-
 <p>Remplissez le formulaire ci-dessous pour accéder aux demandes en cours </p>
 <hr />
-
-
-
-
 <form id="formUtilisateur" name="formUtilisateur" action="" method="post">
-
     <input type="text" id="idUtilisateur" name="idUtilisateur" value="@Model.Utilisateur.Id_utilisateur" hidden />
-
     <div class="form-group">
         <table>
-
             <tr>
                 <td><label>Nom:</label></td>
                 <td>
                     <input id="nom" name="nom" type="text" value="@Model.Utilisateur.Nom" required/>
-
                 </td>
             </tr>
             <tr>
@@ -41,14 +31,11 @@
             <tr>
                 <td><label>Genre:</label></td>
                 <td>
-
                     <select name="Id_Genre" required>
                         @foreach (KeyValuePair<int, string> kpv in Model.GenreDao.ListeGenre())
                         {
                             <option value="@kpv.Key"> @kpv.Value </option>
                         }
-
-
                     </select>
                 </td>
             <tr>
@@ -56,7 +43,6 @@
                 <td><label>Date de naissance:</label></td>
                 <td>
                     <input id="date_naissance" type="date" name="date_naissance" value="@Model.Utilisateur.Date_naissance" required />
-                    
                 </td>
             </tr>
             <tr>
@@ -74,9 +60,7 @@
                                 <option value="@kpv.Key"> @kpv.Value </option>
                             }
                         }
-
                     </select>
-
                 </td>
             </tr>
             <tr>
@@ -94,18 +78,12 @@
                 </td>
             </tr>
             <tr>
-
                 <td>
                     <input id="date_inscription" type="date" name="date_inscription" value="@Model.Utilisateur.Date_inscription" hidden />
                 </td>
             </tr>
-
-
         </table>
-
     </div>
-
-
     <input type="submit" nom="enregistrer" id="enregistrer" value="valider" onclick=" />
     <script>
         function age()
@@ -116,8 +94,6 @@
                 alert("Vous devez avoir plus de 18ans");
             }
         }      
-
-
     </script>
 </form>
 <div> @ViewBag.message </div>

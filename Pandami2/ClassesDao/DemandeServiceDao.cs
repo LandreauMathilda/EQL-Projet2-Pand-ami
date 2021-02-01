@@ -50,8 +50,6 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
-
-        //méthode qui permet d'obtenir une List d'objets DemandeService
         public List<DemandeService> AfficherDemandes()
         {
             SqlConnection cnx = new SqlConnection();
@@ -105,11 +103,8 @@ namespace Pandami2.ClassesDao
                 }
             }
             cnx.Close();
-             
-            
             return listeDemandes;
         }
-
         public List<DemandeService> GetDemandesEnCoursBeneficiaire(int idUtilisateur)
         {
             SqlConnection cnx = new SqlConnection();
@@ -134,7 +129,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_type_service"],
                                                                 (string)dr["nom"]+" "+dr["prenom"],
                                                                 (int)dr["id_demande"]);
-                    
                     listeDemandes.Add(demande);
                 }
             }
@@ -165,7 +159,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_type_service"],
                                                                 (string)dr["nom"] + " " + dr["prenom"],
                                                                 (int)dr["id_demande"]);
-
                     listeDemandes.Add(demande);
                 }
             }
@@ -195,7 +188,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_ville"],
                                                                 (string)dr["libelle_type_service"],
                                                                 (int)dr["id_demande"]);
-
                     listeDemandes.Add(demande);
                 }
             }
@@ -227,7 +219,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["nom"] + " " + dr["prenom"],
                                                                 (int)dr["id_demande"],
                                                                 (int)dr["id_utilisateur"]);
-
                     listeDemandes.Add(demande);
                 }
             }
@@ -258,7 +249,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_type_service"],
                                                                 (string)dr["nom"] + " " + dr["prenom"],
                                                                 (int)dr["id_demande"]);
-
                     listeDemandes.Add(demande);
                 }
             }
@@ -288,7 +278,6 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_ville"],
                                                                 (string)dr["libelle_type_service"],
                                                                 (int)dr["id_demande"]);
-
                     listeDemandes.Add(demande);
                 }
             }
@@ -319,55 +308,54 @@ namespace Pandami2.ClassesDao
                                                                 (string)dr["libelle_type_service"],
                                                                 (string)dr["nom"] + " " + dr["prenom"],
                                                                 (int)dr["id_demande"]);
-
                     listeDemandes.Add(demande);
                 }
             }
             cnx.Close();
             return listeDemandes;
         }
-            public void RechercherParType(int type)
+        public void RechercherParType(int type)
         {
-            SqlConnection cnx = new SqlConnection();
-            cnx.ConnectionString = connStr;
-            cnx.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cnx;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "SELECT id_emetteur,date_enregistrement,date_realisation,adresse_realisation,id_ville,id_type_service FROM demande_service where id_type_service = @id_type ";
-            cmd.CommandType = System.Data.CommandType.Text;
-            SqlDataReader dr = cmd.ExecuteReader();
-            List<DemandeService> listeParType = new List<DemandeService>();
-            if (dr.HasRows)
+        SqlConnection cnx = new SqlConnection();
+        cnx.ConnectionString = connStr;
+        cnx.Open();
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = cnx;
+        cmd.CommandType = System.Data.CommandType.Text;
+        cmd.CommandText = "SELECT id_emetteur,date_enregistrement,date_realisation,adresse_realisation,id_ville,id_type_service FROM demande_service where id_type_service = @id_type ";
+        cmd.CommandType = System.Data.CommandType.Text;
+        SqlDataReader dr = cmd.ExecuteReader();
+        List<DemandeService> listeParType = new List<DemandeService>();
+        if (dr.HasRows)
+        {
+            while (dr.Read())
             {
-                while (dr.Read())
+                DemandeService demande = new DemandeService((int)dr["id_emetteur"]);
+                demande.IdDemande = (int)dr["id_demande"];
+                demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
+                demande.DateRealisation = (DateTime)dr["date_realisation"];
+                if (dr["adresse_realisation"] != DBNull.Value)
                 {
-                    DemandeService demande = new DemandeService((int)dr["id_emetteur"]);
-                    demande.IdDemande = (int)dr["id_demande"];
-                    demande.DateEnregistrement = (DateTime)dr["date_enregistrement"];
-                    demande.DateRealisation = (DateTime)dr["date_realisation"];
-                    if (dr["adresse_realisation"] != DBNull.Value)
-                    {
-                        demande.AdresseRealisation = (string)dr["adresse_realisation"];
-                    }
-                    if (dr["id_ville"] != DBNull.Value)
-                    {
-                        demande.VilleRealisation = (int)dr["id_ville"];
-                    }
-                    demande.IdTypeService = (int)dr["id_type_service"];
-                    if (dr["date_annulation"] != DBNull.Value)
-                    {
-                        demande.DateAnnulation = (DateTime)dr["date_annulation"];
-                    }
-                    if (dr["date_cloture"] != DBNull.Value)
-                    {
-                        demande.DateCloture = (DateTime)dr["date_cloture"];
-                    }
-                    listeParType.Add(demande);
+                    demande.AdresseRealisation = (string)dr["adresse_realisation"];
                 }
+                if (dr["id_ville"] != DBNull.Value)
+                {
+                    demande.VilleRealisation = (int)dr["id_ville"];
+                }
+                demande.IdTypeService = (int)dr["id_type_service"];
+                if (dr["date_annulation"] != DBNull.Value)
+                {
+                    demande.DateAnnulation = (DateTime)dr["date_annulation"];
+                }
+                if (dr["date_cloture"] != DBNull.Value)
+                {
+                    demande.DateCloture = (DateTime)dr["date_cloture"];
+                }
+                listeParType.Add(demande);
             }
-            cnx.Close();
         }
+        cnx.Close();
+    }
 
         public void AnnulerDemande(int idDemande)
         {
@@ -384,49 +372,33 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
-
-        
-       
-            public void CloturerUneDemandeFinalisee(int idDemande)
+        public void CloturerUneDemandeFinalisee(int idDemande)
             {
-                SqlConnection cnx = new SqlConnection();
-                cnx.ConnectionString = connStr;
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cnx;
-
-                cmd.CommandText = "dbo.CloturerUneDemandeFinalisee";
-
-
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
-
-                cnx.Open();
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "dbo.CloturerUneDemandeFinalisee";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+            cnx.Open();
             cmd.ExecuteNonQuery();
-                cnx.Close();
-
-            }
-            public void CloturerUneDemandeNonFinalisee(int idDemande)
-            {
-                SqlConnection cnx = new SqlConnection();
-                cnx.ConnectionString = connStr;
-               
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cnx;
-
-                cmd.CommandText = "dbo.cloturerUneDemandeNonFinalisee";
-
-
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
-
-
-                cnx.Open();
-                cmd.ExecuteNonQuery();
-                cnx.Close();
-
-            }
+            cnx.Close();
+        }
+        public void CloturerUneDemandeNonFinalisee(int idDemande)
+        {
+            SqlConnection cnx = new SqlConnection();
+            cnx.ConnectionString = connStr;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnx;
+            cmd.CommandText = "dbo.cloturerUneDemandeNonFinalisee";
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@idDemande", idDemande));
+            cnx.Open();
+            cmd.ExecuteNonQuery();
+            cnx.Close();
         }
     }
+}
     
 

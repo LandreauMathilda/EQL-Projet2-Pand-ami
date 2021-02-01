@@ -147,27 +147,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ClassesDao\EquipementDao.cs" />
-    <Compile Include="ClassesDao\GenreDAO.cs" />
     <Compile Include="ClassesDao\TypeServiceDao.cs" />
     <Compile Include="ClassesDao\VilleDao.cs" />
     <Compile Include="ClassesDao\DemandeServiceDao.cs" />
     <Compile Include="Controllers\GestionDesDemandesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ClassesDao\ReponseDao.cs" />
     <Compile Include="ClassesDao\UtilisateurDao.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Reponse.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Equipement.cs" />
     <Compile Include="Models\TypeService.cs" />
     <Compile Include="Models\ViewModelDemandeService.cs" />
-    <Compile Include="Models\ViewModelUtilisateur.cs" />
     <Compile Include="Models\Ville.cs" />
     <Compile Include="Models\DemandeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,12 +201,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Utilisateur\Profil.cshtml" />
     <Content Include="Views\GestionDesDemandes\SuiviDesDemandes.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Utilisateur\Inscription.cshtml" />
     <Content Include="Views\GestionDesDemandes\RechercherUneDemande.cshtml" />
     <Content Include="Views\GestionDesDemandes\DeposerUneDemande.cshtml" />
@@ -219,6 +211,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Accueil\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

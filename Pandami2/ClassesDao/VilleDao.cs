@@ -24,7 +24,6 @@ namespace Pandami2.ClassesDao
             cmd.Parameters.Add(idVillePara);
             SqlDataReader dr = cmd.ExecuteReader();
             String cpVille = "";
-
             if (dr.HasRows)
             {
                 while (dr.Read())
@@ -34,7 +33,6 @@ namespace Pandami2.ClassesDao
                 dr.Close();
             }
             cnx.Close();
-
             return cpVille;
         }
 

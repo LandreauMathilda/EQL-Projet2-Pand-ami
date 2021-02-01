@@ -14,13 +14,11 @@ namespace Pandami2.Models
     {
         private SqlConnection cnx;
 
-
         private void connection()
         {
             string connectionstring= System.Configuration.ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
             cnx = new SqlConnection(connectionstring);
         }
-
         public void AjoutUtilisateur(Utilisateur utilisateur)
         {
             connection();
@@ -30,39 +28,19 @@ namespace Pandami2.Models
             cmd.CommandType = System.Data.CommandType.Text;           
             
             cmd.Parameters.Add(new SqlParameter("@nom", utilisateur.Nom));
-
-            
             cmd.Parameters.Add(new SqlParameter("@prenom", utilisateur.Prenom));
-
-            
             cmd.Parameters.Add( new SqlParameter("@Id_genre", utilisateur.Id_genre));
-
-            
             cmd.Parameters.Add(new SqlParameter("@date_naissance", utilisateur.Date_naissance));
-
-           
             cmd.Parameters.Add(new SqlParameter("@adresse", utilisateur.Adresse));
-
-           
             cmd.Parameters.Add(new SqlParameter("@Id_ville", utilisateur.Id_ville));
-
-            
             cmd.Parameters.Add(new SqlParameter("@num_telephone", utilisateur.Num_telephone));
-
-            
             cmd.Parameters.Add(new SqlParameter("@email", utilisateur.Email));
-
-            
             cmd.Parameters.Add(new SqlParameter("@date_inscription", DateTime.Now));
             cnx.Open();
             cmd.ExecuteNonQuery();
             cnx.Close();
-
         }
-
-
         public List <Utilisateur> AfficherListeUtilisateur()
-
         {
             connection();
             List<Utilisateur> listeUtilisateurs = new List<Utilisateur>();
@@ -75,7 +53,6 @@ namespace Pandami2.Models
             cnx.Open();
             da.Fill(dt);
             cnx.Close();
-
             foreach(DataRow dr in dt.Rows)
             {
                 listeUtilisateurs.Add(new Utilisateur
@@ -90,16 +67,9 @@ namespace Pandami2.Models
                  Num_telephone=Convert.ToInt32(dr["num_telephone"]),
                  Email=Convert.ToString(dr["email"]),
                  Date_inscription=Convert.ToDateTime(dr["date_inscription"])
-                
                 });
-
-               
             }
             return listeUtilisateurs;
-            
-
         }
-       
-       
     }
 }

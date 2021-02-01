@@ -11,7 +11,6 @@ namespace Pandami2.ClassesDao
     {   
         // classe qui comporte des méthodes pour insérer ou mettre à jour des données dans la table reponse
         private SqlConnection cnx;
-
         private void connection()
         {
             string connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
@@ -31,7 +30,6 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
-
         // méthode qui permet de mettre à jour la date d'acceptation d'une réponse faite par un bénévole à une demande de service
         //@param : un idDemande => la demande à laquelle le bénévole a répondu
         //         un idBenevole => le bénévole qui a repondu à la demande de service
@@ -48,7 +46,6 @@ namespace Pandami2.ClassesDao
             cmd.ExecuteNonQuery();
             cnx.Close();
         }
-
         //méthode qui permet de mettre à jour la date_annulation_participation dans la table reponse
         //@param : un idDemande => la demande à laquelle le bénévole a répondu
         //         un idBenevole => le bénévole qui a repondu à la demande de service

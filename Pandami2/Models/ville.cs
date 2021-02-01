@@ -12,9 +12,6 @@ namespace Pandami2.Models
     public class Ville
     {
         private int idVille;
-
-
         public int IdVille { get => idVille; }
-
     }
 }

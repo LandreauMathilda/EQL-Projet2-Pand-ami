@@ -15,8 +15,6 @@ namespace Pandami2.ClassesDao
         public int IdTypeService { get => idTypeService; }
         public int IdCategorie { get => idCategorie; }
 
-
-
         string connStr = ConfigurationManager.ConnectionStrings["PandamiConnectionString"].ConnectionString;
 
         public String LireTypeService(int idTypeService)
@@ -32,7 +30,6 @@ namespace Pandami2.ClassesDao
             cmd.Parameters.Add(idTypeServicePara);
             SqlDataReader dr = cmd.ExecuteReader();
             String typeService = "";
-
             if (dr.HasRows)
             {
                 while (dr.Read())
@@ -42,7 +39,6 @@ namespace Pandami2.ClassesDao
                 dr.Close();
             }
             cnx.Close();
-
             return typeService;
         }
 

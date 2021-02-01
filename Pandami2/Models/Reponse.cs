@@ -18,8 +18,6 @@ namespace Pandami2.Models
         Utilisateur utilisateur;
         DemandeService demande;
 
-
-
         public int Id_reponse { get => id_reponse; }
         public int Id_utilisateur { get => id_utilisateur; }
         public int Id_demande { get => id_demande; }
@@ -33,7 +31,6 @@ namespace Pandami2.Models
         public Reponse()
         {
         }
-
         public Reponse(DateTime date_reponse, DateTime date_acceptation, DateTime date_refus, DateTime date_annulation_participation, Utilisateur utilisateur, DemandeService demande)
         {
             this.date_reponse = date_reponse;
@@ -43,16 +40,11 @@ namespace Pandami2.Models
             this.utilisateur = utilisateur;
             this.demande = demande;
         }
-
         public Reponse(int id_utilisateur, int id_demande, DateTime date_reponse)
         {
             this.id_utilisateur = id_utilisateur;
             this.id_demande = id_demande;
             this.date_reponse = date_reponse;
         }
-
-        
-
-
     }
 }
