@@ -6859,6 +6859,7 @@ button.close {
 }
 #blocpresentation, #bodydepot{
     width : 78vw;
+    margin : auto;
 }
 #blocgauche, #blocdroit {
     margin: auto;
@@ -6952,6 +6953,7 @@ button.close {
 #bodypageaccueil{
     padding-left : 10vw;
     padding-right : 10vw;
+    margin : auto;
     align-content : center;
 }
 #tablesuividem{
