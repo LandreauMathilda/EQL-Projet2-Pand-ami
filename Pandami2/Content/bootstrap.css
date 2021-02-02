@@ -6840,7 +6840,7 @@ button.close {
   }
 }
 #imgpandami{
-    width : 10vw;
+    width : 25vw;
     display : block;
     margin-left : auto;
     margin-right : auto;
@@ -6862,8 +6862,11 @@ button.close {
 }
 #blocgauche, #blocdroit {
     margin: auto;
-    width: 36.5vw;
+    width: 38vw;
     text-align: center;
+}
+#blocdroit{
+    float : right;
 }
 .demandes {
     border: 0.3vh solid black;
@@ -6875,42 +6878,58 @@ button.close {
     height: auto;
     background-color: #f9eaa1;
 }
-#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours, #depotdem, #profil {
+#demenattente, #demavalider, #demnonpourv, #dempassees, #demcours{
     margin: 1vh;
-    padding: 1vh;
+    padding: 4vh;
     background-color: #f9e68d;
+    align-content : center;
+}
+ #profil, #blocprofil, #formUtilisateur {
+    padding-left: 25vw;
+    padding-right: 25vw;
+}
+#depotdem {
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+#btndepot{
+    float : right;
+    text-align : center;
+}
+#btndemo{
+    float : left;
 }
 .row {
     background-color: #f9e68d;
-    width : 78vw;
-    vertical-align : middle;
+    width: 78vw;
+    vertical-align: middle;
+    padding: 1vw;
 }
-.bodydem{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    width: 80vw;
-    margin-left : 20vw;
-}
+
 .titredem {
     text-align: center;
     font-size: 3vh;
 }
-.btnsuividem {
+.btnsuividem{
     padding: 0.5vh;
     margin: 0.5vh;
     font-size: 1.75vh;
     float: right;
 }
 .lbl1 {
-    font-size: 1.75vh;
+    font-size: 2.5vh;
 }
 .lbl2 {
-    font-size: 1.7vh;
+    font-size: 2vh;
     float: right;
+}
+.lbl3{
+    margin : 0.5vh;
+    width : 15vw;
+}
+.lbl4{
+    margin : 0.5vh;
+    width : 20vw;
 }
 #equip {
     float: right;
@@ -6924,8 +6943,8 @@ button.close {
     background-color: #fbf9ec;
     align-content : center;
 }
-#blocprofil, #bodydem, #depotdem{
-    margin : auto;
+#blocprofil, #bodydem, #depotdem {
+    margin: auto;
 }
 #tableprofil{
     margin : 1vw;
@@ -6969,4 +6988,15 @@ button.close {
     padding: 8px;
     width: 78vw;
     margin: auto;
+}
+#forminscription{
+    text-align : center;
+}
+#enregistrer, #btndepot, #btndemo {
+    float: right;
+    font-size: 2vh;
+    margin: 1vh;
+}
+#btnaccueilgauche, #btnaccueildroit{
+    font-size : 2vh;
 }

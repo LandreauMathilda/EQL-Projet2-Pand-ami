@@ -12,15 +12,15 @@
         <div class="row" id="depotdem">
             <form method="post" action="" onsubmit="return validation()" >
                 <br />
-                <input type="text" id="idEmetteur" name="idEmetteur" value="@Model.IdEmetteur" hidden />
+                <input class="lbl4" type="text" id="idEmetteur" name="idEmetteur" value="@Model.IdEmetteur" hidden />
                 <table>
                     <tr>
                         <td>
-                            <label for="idTypeService">Veuillez selectionner un type de service : </label>
+                            <label class="lbl4" for="idTypeService">Veuillez selectionner un type de service : </label>
                         </td>
                         <td>
-                            <select id="idTypeService" name="idTypeService" onchange="supprBordureRouge()">
-                                <option value=""> Choisir un type de service </option>
+                            <select class="lbl4" id="idTypeService" name="idTypeService" onchange="supprBordureRouge()">
+                                <option  class="lbl4" value=""> Choisir un type de service </option>
                                 @{ foreach (KeyValuePair
                                   <int, string>
                                       kvp in Model.TypeServDao.ChargerListeTypeService())
@@ -33,11 +33,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="besoineqm">Besoin en équipement </label>
+                            <label class="lbl4" for="besoineqm">Besoin en équipement : </label>
                         </td>
                         <td>
-                            <select name="idEquipement" id="idEquipement" multiple>
-                                <option value=""> Choisissez un équipement </option>
+                            <select class="lbl4" name="idEquipement" id="idEquipement" multiple>
+                                <option class="lbl4" value=""> Choisissez un équipement </option>
                                 @{ foreach (KeyValuePair
                                   <int, string>
                                       kvp in Model.EquipmtDao.ChargerListeEquipements())
@@ -50,40 +50,40 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="datereal">Date de réalisation</label>
+                            <label class="lbl4" for="datereal">Date de réalisation : </label>
                         </td>
                         <td>
-                            <input type="date" id="dateRealisation" name="dateRealisation" onchange="supprBordureRouge()" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="heurereal">Heure de réalisation </label>
-                        </td>
-                        <td>
-                            <input type="time" name="heureRealisation" id="heureRealisation" onchange="supprBordureRouge()" />
+                            <input class="lbl4" type="date" id="dateRealisation" name="dateRealisation" onchange="supprBordureRouge()" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label name="lieureal">Lieu de réalisation (si différent du lieu de résidence) </label>
+                            <label class="lbl4" for="heurereal">Heure de réalisation : </label>
+                        </td>
+                        <td>
+                            <input class="lbl4" type="time" name="heureRealisation" id="heureRealisation" onchange="supprBordureRouge()" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label name="numrue">N° et rue </label>
-                        </td>
-                        <td>
-                            <input type="text" name="numrue" id="adresseRealisation" />
+                            <label class="lbl4" name="lieureal">Lieu de réalisation : </br>(si différent du lieu de résidence) </label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="ville">Ville :</label>
+                            <label class="lbl4" name="numrue">N° et rue : </label>
                         </td>
                         <td>
-                            <select id="ville" name="idVille">
-                                <option value=""> Choisissez une ville </option>
+                            <input class="lbl4" type="text" name="numrue" id="adresseRealisation" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="lbl4" for="ville">Ville :</label>
+                        </td>
+                        <td>
+                            <select class="lbl4" id="ville" name="idVille">
+                                <option  class="lbl4" value=""> Choisissez une ville </option>
                                 @{ foreach (KeyValuePair
                                   <int, string>
                                       kvp in Model.VilDao.ChargerListeVille())
@@ -96,7 +96,7 @@
                     </tr>
                 </table>
                 <input type="text" name="dateEnregistrement" value="@DateTime.Now.ToString()" hidden />
-                <input type="submit" value="valider" />
+                <input id="btndepot" type="submit" value="Valider" />
             </form>
             <br />
             <div>@ViewBag.Message</div>
