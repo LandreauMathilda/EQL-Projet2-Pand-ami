@@ -42,7 +42,7 @@ namespace Pandami2.Controllers
         {
             DemandeServiceDao demandeServiceDao = new DemandeServiceDao();
             ViewBag.listeDemandes = demandeServiceDao.AfficherDemandes();
-            ViewBag.utilisateur = 2;
+            ViewBag.utilisateur = 1;
             TypeServiceDao typeServiceDao = new TypeServiceDao();
             ViewBag.listeTypeService = typeServiceDao.ChargerListeTypeService();
             return View();

@@ -57,26 +57,8 @@ namespace Pandami2.ClassesDao
             cnx.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnx;
-            cmd.CommandText = "SELECT ut.nom, " +
-                                     "ut.prenom, " +
-                                     "ds.id_demande, " +
-                                     "ds.id_emetteur, " +
-                                     "ds.date_enregistrement, " +
-                                     "ds.date_realisation, " +
-                                     "case when ds.adresse_realisation is null then ut.adresse else ds.adresse_realisation end as adresse_realisation, " +
-                                     "ut.id_ville, " +
-                                     "case when vi.libelle_ville is null then (" +
-                                                                          "SELECT libelle_ville FROM ville WHERE id_ville=ut.id_ville) else vi.libelle_ville end as libelle_ville, " +
-                                     "ts.libelle_type_service, " +
-                                     "ds.date_annulation, " +
-                                     "ds.date_cloture, " +
-                                     "ds.date_non_finalisation, " +
-                                     "ds.id_motif_annulation " +
-                              "FROM demande_service ds INNER JOIN utilisateur ut on ds.id_emetteur=ut.id_utilisateur " +
-                                                      "INNER JOIN ville vi ON ds.id_ville=vi.id_ville " +
-                                                      "INNER JOIN type_service ts ON ds.id_type_service=ts.id_type_service;";
-
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.AfficherDemandesService";
             SqlDataReader dr = cmd.ExecuteReader();
             List<DemandeService> listeDemandes = new List<DemandeService>();
             if (dr.HasRows)
